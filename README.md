@@ -16,10 +16,12 @@ Each mini-project combines mathematical derivations, computational implementatio
  - Econometric reasoning for applied economic and financial problems
 
 # Repository Structure
+```text
 Time-Series/
 ├── README.md
 ├── requirements.txt
 ├── data/
+│   └── raw/
 ├── figures/
 ├── reports/
 ├── notebooks/
@@ -29,6 +31,8 @@ Time-Series/
 │   ├── report.pdf
 │   └── figures/
 └── project_02_...
+```
+
 
 # How to Run
 
