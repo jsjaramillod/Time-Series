@@ -30,7 +30,59 @@ Time-Series/
 │   ├── notebook.ipynb
 │   ├── report.pdf
 │   └── figures/
-└── project_02_...
+└── project_02_bayesian_macro_policy/
+    ├── README.md
+    ├── pyproject.toml
+    ├── .gitignore
+    ├── Makefile
+    │
+    ├── data/
+    │   ├── README.md
+    │   ├── raw/
+    │   └── processed/
+    │
+    ├── notebooks/
+    │   └── bayesian_macro_policy_analysis.ipynb
+    │
+    ├── src/
+    │   └── bayesian_macro/
+    │       ├── __init__.py
+    │       ├── config.py
+    │       ├── results.py
+    │       │
+    │       ├── data/
+    │       │   ├── interest_rate.py
+    │       │   └── recession.py
+    │       │
+    │       ├── models/
+    │       │   ├── coin_comparison.py
+    │       │   ├── gaussian_gibbs.py
+    │       │   └── probit_gibbs.py
+    │       │
+    │       ├── analysis/
+    │       │   ├── interest_rate_rule.py
+    │       │   ├── recession_forecast.py
+    │       │   └── chib.py
+    │       │
+    │       └── visualization/
+    │           └── plots.py
+    │
+    ├── benchmarks/
+    │   └── expected_results.json
+    │
+    ├── tests/
+    │   ├── test_coin_comparison.py
+    │   ├── test_interest_rate_data.py
+    │   ├── test_gaussian_gibbs.py
+    │   ├── test_probit_data.py
+    │   └── test_replication_targets.py
+    │
+    ├── figures/
+    └── results/
+        ├── posterior_summaries.csv
+        ├── model_probabilities.csv
+        ├── recession_forecasts.csv
+        └── replication_report.csv
 ```
 
 
