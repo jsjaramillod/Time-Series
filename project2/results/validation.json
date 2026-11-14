@@ -1,0 +1,123 @@
+{
+  "sampler_diagnostics_passed": true,
+  "independent_evidence_controls_passed": true,
+  "models": {
+    "symmetric_v10": {
+      "sampler": {
+        "passed": true,
+        "max_rhat": 1.000054621747626,
+        "min_bulk_ess": 38756.42249704917,
+        "min_tail_ess": 38614.415182930206,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "derived": {
+        "passed": true,
+        "max_rhat": 1.000027263110196,
+        "min_bulk_ess": 40007.94345976137,
+        "min_tail_ess": 38849.988031753506,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "predictive_check": {
+        "type": "fixed-design conditional posterior predictive check",
+        "residual_lag1_acf_at_posterior_mean": 0.1763108662033753,
+        "ppp_abs_lag1_acf": 0.0075,
+        "draws_used": 2000,
+        "limitations": "Conditions on observed lagged rate; not a dynamic forecast"
+      }
+    },
+    "asymmetric_v10": {
+      "sampler": {
+        "passed": true,
+        "max_rhat": 1.000132513055937,
+        "min_bulk_ess": 37784.682672138406,
+        "min_tail_ess": 38550.97594647179,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "derived": {
+        "passed": true,
+        "max_rhat": 1.0000327290236057,
+        "min_bulk_ess": 40062.146429184475,
+        "min_tail_ess": 38896.606540186396,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "predictive_check": {
+        "type": "fixed-design conditional posterior predictive check",
+        "residual_lag1_acf_at_posterior_mean": 0.17662724476023228,
+        "ppp_abs_lag1_acf": 0.005,
+        "draws_used": 2000,
+        "limitations": "Conditions on observed lagged rate; not a dynamic forecast"
+      }
+    },
+    "symmetric_v5": {
+      "sampler": {
+        "passed": true,
+        "max_rhat": 1.000055292636052,
+        "min_bulk_ess": 38757.213855441005,
+        "min_tail_ess": 38614.415182930206,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "derived": {
+        "passed": true,
+        "max_rhat": 1.0000270192472218,
+        "min_bulk_ess": 40007.808262791674,
+        "min_tail_ess": 38849.988031753506,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "predictive_check": {
+        "type": "fixed-design conditional posterior predictive check",
+        "residual_lag1_acf_at_posterior_mean": 0.17628815474176676,
+        "ppp_abs_lag1_acf": 0.008,
+        "draws_used": 2000,
+        "limitations": "Conditions on observed lagged rate; not a dynamic forecast"
+      }
+    },
+    "asymmetric_v5": {
+      "sampler": {
+        "passed": true,
+        "max_rhat": 1.0001316334882022,
+        "min_bulk_ess": 37785.54767183059,
+        "min_tail_ess": 38550.949633084536,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "derived": {
+        "passed": true,
+        "max_rhat": 1.00003201869272,
+        "min_bulk_ess": 40062.129652814314,
+        "min_tail_ess": 38897.30957488651,
+        "thresholds": {
+          "rhat_max": 1.01,
+          "ess_min": 400
+        }
+      },
+      "predictive_check": {
+        "type": "fixed-design conditional posterior predictive check",
+        "residual_lag1_acf_at_posterior_mean": 0.17658416165007085,
+        "ppp_abs_lag1_acf": 0.005,
+        "draws_used": 2000,
+        "limitations": "Conditions on observed lagged rate; not a dynamic forecast"
+      }
+    }
+  },
+  "status": "validated computationally"
+}

@@ -1,0 +1,8 @@
+{
+  "notebook": "notebooks/project02_analysis.ipynb",
+  "sha256": "06769b63aa8062e5277347448aea30e7e846effdf9afeaa2ce19538c34c60767",
+  "cells": 23,
+  "executed_code_cells": 11,
+  "cell_errors": 0,
+  "mode": "inspect generated empirical results; estimation separately executed through the CLI"
+}

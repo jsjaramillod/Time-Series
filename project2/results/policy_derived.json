@@ -1,0 +1,88 @@
+[
+  {
+    "model": "symmetric_v10",
+    "long_run_positive": {
+      "probability": 0.999425,
+      "mcse": 0.000119771446072588,
+      "no_observed_transitions": false
+    },
+    "long_run_above_one": {
+      "probability": 0.9343,
+      "mcse": 0.0012458121711326853,
+      "no_observed_transitions": false
+    },
+    "unstable_draw_fraction": 0.000125,
+    "near_unit_root_fraction_abs_one_minus_rho_below_0_01": 0.000325,
+    "theta_median": 1.599018721354511,
+    "theta_p05": 0.9467394381181115,
+    "theta_p95": 2.4815151687454384,
+    "theta_gt1_given_stable": 0.9344168021002626
+  },
+  {
+    "model": "asymmetric_v10",
+    "long_run_positive": {
+      "probability": 0.99965,
+      "mcse": 9.347657306918887e-05,
+      "no_observed_transitions": false
+    },
+    "long_run_above_one": {
+      "probability": 0.938125,
+      "mcse": 0.0012100726280646313,
+      "no_observed_transitions": false
+    },
+    "unstable_draw_fraction": 2.5e-05,
+    "near_unit_root_fraction_abs_one_minus_rho_below_0_01": 0.00015,
+    "theta_median": 1.5849211436296495,
+    "theta_p05": 0.961367998718414,
+    "theta_p95": 2.4028788939808376,
+    "theta_gt1_given_stable": 0.9381484537113428,
+    "positive_minus_negative_gap_above_zero": {
+      "probability": 0.1583,
+      "mcse": 0.0018224235509779396,
+      "no_observed_transitions": false
+    }
+  },
+  {
+    "model": "symmetric_v5",
+    "long_run_positive": {
+      "probability": 0.999425,
+      "mcse": 0.000119771446072588,
+      "no_observed_transitions": false
+    },
+    "long_run_above_one": {
+      "probability": 0.934375,
+      "mcse": 0.0012453574790496013,
+      "no_observed_transitions": false
+    },
+    "unstable_draw_fraction": 0.000125,
+    "near_unit_root_fraction_abs_one_minus_rho_below_0_01": 0.000325,
+    "theta_median": 1.5994556217673226,
+    "theta_p05": 0.9470194182911944,
+    "theta_p95": 2.482315367089102,
+    "theta_gt1_given_stable": 0.9344918114764346
+  },
+  {
+    "model": "asymmetric_v5",
+    "long_run_positive": {
+      "probability": 0.99965,
+      "mcse": 9.347657306918887e-05,
+      "no_observed_transitions": false
+    },
+    "long_run_above_one": {
+      "probability": 0.93825,
+      "mcse": 0.0012092621330764795,
+      "no_observed_transitions": false
+    },
+    "unstable_draw_fraction": 2.5e-05,
+    "near_unit_root_fraction_abs_one_minus_rho_below_0_01": 0.00015,
+    "theta_median": 1.5855788063876282,
+    "theta_p05": 0.9616665106357338,
+    "theta_p95": 2.4041874767372513,
+    "theta_gt1_given_stable": 0.9382734568364209,
+    "positive_minus_negative_gap_above_zero": {
+      "probability": 0.15895,
+      "mcse": 0.0018257222162479598,
+      "no_observed_transitions": false
+    }
+  }
+]

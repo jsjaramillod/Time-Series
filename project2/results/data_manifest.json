@@ -1,0 +1,18 @@
+{
+  "input": "int_rate_rule_data.xlsx",
+  "sha256": "39e168ac38890809c3c701c7ffa8e0b66aa8b3fcb98efb909cc2d6a8fdd61e57",
+  "raw_rows": 240,
+  "raw_start": "1954-10-01",
+  "raw_end": "2014-07-01",
+  "effective_n": 239,
+  "effective_start": "1955-01-01",
+  "effective_end": "2014-07-01",
+  "frequency": "quarterly",
+  "inflation_gap": "PI - PI_Target, percentage points as supplied",
+  "output_gap": "100 * (log(GDP) - log(GDP_POT))",
+  "rate": "FF as supplied, percentage points; one quarterly lag",
+  "missing_handling": "reject; no interpolation or imputation",
+  "vintage": "unknown; local teaching workbook, not a historical-vintage dataset",
+  "trend_inflation": "PI_Target supplied; construction not independently reproduced",
+  "redistribution": "not established; source workbook excluded from public files"
+}

@@ -2,14 +2,14 @@
 
 An applied econometrics portfolio focused on Bayesian inference, temporal dynamics, and probabilistic forecasting. The projects examine how assumptions about economic relationships, model structure, and uncertainty affect the conclusions we draw from data.
 
-The central questions connect learning and prediction: how beliefs change with new observations, how economic shocks propagate, and how models translate incomplete information into forecasts. Bayesian updating anchors the existing work. Planned extensions use Markov chain Monte Carlo (MCMC), including Gibbs sampling, to study monetary policy, recession risk, growth, employment, and common economic and financial signals.
+The central questions connect learning and prediction: how beliefs change with new observations, how economic shocks propagate, and how models translate incomplete information into forecasts. Bayesian updating anchors the existing work. Project 02 uses Markov chain Monte Carlo (MCMC), including Gibbs sampling, to study monetary policy and recession risk. Planned extensions address growth, employment, and common economic and financial signals.
 
 ## Projects and current status
 
 | Project | Economic or statistical question | Material and implementation status |
 | --- | --- | --- |
 | [01 — Bayesian Learning and Posterior Prediction for Discrete Data](project_01_bayesian_discrete_models) | How do prior beliefs and observations shape posterior predictions? | Existing [Python notebook](project1/project_01_bayesian_discrete_models.ipynb), PGA scoring data, figures, and project description. |
-| [02 — Bayesian Monetary Policy and Recession Risk](project2/README.md) | Do policy responses differ across economic conditions, and which financial signals anticipate recessions? | Research design; implementation pending. |
+| [02 — Bayesian Monetary Policy and Recession Risk](project2/README.md) | Do policy responses differ across economic conditions, and which financial signals anticipate recessions? | Implemented Python package, scientific tests, empirical policy analysis, and pseudo-real-time recession forecasts; documented model and data limitations. |
 | [03 — Persistence and Shock Propagation in Time Series](project3/README.md) | How do autoregressive dynamics determine stability, persistence, and the response to a controlled shock? | Research design; implementation pending. |
 | [04 — Lag Uncertainty and Bayesian Model Averaging](project4/README.md) | How much history does a model need, and how does lag uncertainty affect inference about persistence? | Research design; implementation pending. |
 | [05 — Probabilistic GDP Forecasts and Growth at Risk](project5/README.md) | How much could U.S. GDP grow over the next year, and how well do predictive distributions describe downside outcomes? | Research design; implementation pending. |
@@ -17,7 +17,7 @@ The central questions connect learning and prediction: how beliefs change with n
 | [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Research design; implementation pending. |
 | [08 — Common Factors, Forecast Evaluation, and Structural Interpretation](project8/README.md) | Can common signals aid prediction, and what long-run assumptions support the interpretation of technology shocks? | Research design; implementation pending. |
 
-Projects 02–08 currently contain research designs in their READMEs. Their estimation code, shared components, prepared datasets, and empirically reproduced results remain to be developed. Each design identifies its inputs, methods, validation criteria, and planned deliverables, keeping reference calculations separate from reproduced findings.
+Project 02 now includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Projects 03–08 contain research designs; their implementations and reproduced results remain to be developed.
 
 ## Repository contents
 
@@ -33,7 +33,14 @@ Time-Series/
 │   │   └── pga_scores.xlsx
 │   └── figures/
 ├── project2/
-│   └── README.md
+│   ├── README.md
+│   ├── pyproject.toml
+│   ├── requirements-repro.txt
+│   ├── src/bayes_policy/
+│   ├── tests/
+│   ├── docs/
+│   ├── notebooks/
+│   └── results/
 ├── project3/
 │   └── README.md
 ├── project4/
@@ -48,13 +55,13 @@ Time-Series/
     └── README.md
 ```
 
-Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. There is currently no shared dependency manifest or automated environment setup. Projects 02–08 have no executable pipelines yet.
+Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. Project 02 has its own installable package, dependency specification, command-line pipelines, and scientific test suite; see its README for reproduction commands. Projects 03–08 have no executable pipelines yet.
 
 <a id="research-progression"></a>
 
 ## Econometric themes
 
-These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01; the other themes are specified in the designs for Projects 02–08.
+These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01. Policy-response inference and recession probabilities are implemented in Project 02; the remaining themes are specified in the designs for Projects 03–08.
 
 | Theme | Economic or statistical question | Methods and application |
 | --- | --- | --- |
@@ -73,9 +80,9 @@ These connections guide the software design as well as the research questions. R
 
 ## Modeling approach
 
-The existing Python notebook combines analytical derivations, simulation, visualization, and posterior prediction. The planned implementation uses reusable object-oriented components for data validation, posterior sampling, model comparison, and forecast evaluation. Economic specifications will share computational routines while keeping their assumptions, data transformations, and interpretations explicit.
+The existing Python notebook combines analytical derivations, simulation, visualization, and posterior prediction. Project 02 implements reusable object-oriented components for data validation, posterior sampling, model comparison, and forecast evaluation. Economic specifications will share computational routines while keeping their assumptions, data transformations, and interpretations explicit.
 
-Planned MCMC components support Bayesian regression, probit, BVAR, and dynamic-factor inference. Known-parameter dynamics use direct simulation and matrix calculations; Kalman controls use analytical filtering. The wide-predictor OLS/ridge/PCA comparison evaluates point forecasts.
+Implemented MCMC components support independent-prior Bayesian regression and latent-variable probit. BVAR and dynamic-factor inference remain planned extensions. Known-parameter dynamics use direct simulation and matrix calculations; Kalman controls use analytical filtering. The wide-predictor OLS/ridge/PCA comparison evaluates point forecasts.
 
 Forecast designs emphasize observed-data baselines, matched horizons, release calendars, and explicit vintage policies. Pandemic interpolation remains a retrospective sensitivity. Project 07 separates feasible post-crisis evaluation from scenarios that use retrospective crisis information.
 

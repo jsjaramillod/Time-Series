@@ -1,0 +1,33 @@
+{
+  "input": "Recession_Forecast_Data.xlsx",
+  "sha256": "0d6605fa63413acbb64f690dbcd55a3ec35616df7ef85b804e3f72d298b98f7f",
+  "raw_rows": 794,
+  "start": "1960-01-31",
+  "end": "2026-02-28",
+  "frequency": "monthly",
+  "equity_return": "100*(SP500_t/SP500_(t-3)-1), simple percent return",
+  "spread": "TenYearBondYield - ThreeMonthBillYield, percentage points",
+  "missing_handling": "reject; no imputation",
+  "vintage": "unknown",
+  "redistribution": "source workbook excluded; rights not established",
+  "horizon": 12,
+  "prior_covariance": "10 I, independent normal coefficients",
+  "latent_variance": 1,
+  "metadata": {
+    "run_utc": "2026-11-14T13:51:02.257463+00:00",
+    "sampler": {
+      "draws": 10000,
+      "warmup": 3000,
+      "chains": 4,
+      "seed": 20261114
+    },
+    "software": {
+      "bayes-policy": "0.1.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "pandas": "3.1.1",
+      "arviz": "0.23.4",
+      "matplotlib": "3.11.2"
+    }
+  }
+}

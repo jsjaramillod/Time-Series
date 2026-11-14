@@ -1,1 +1,12 @@
 .DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+project2/.venv/
+project2/.local/
+project2/data/private/
+project2/results/draws/
+project2/results/**/draws/
+.ipynb_checkpoints/
