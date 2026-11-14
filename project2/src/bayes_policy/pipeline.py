@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 from .comparison import ChibModelComparison, model_probabilities, quadrature_log_evidence
-from .data import InterestRateData, RecessionData, file_digest
+from .data import InterestRateData, RecessionData
 from .evaluation import ExpandingWindowEvaluator
 from .models import GaussianRegression
 from .priors import GammaPrecisionPrior, NormalPrior
@@ -104,12 +104,6 @@ def run_policy(excel: str | Path, output: str | Path, config: SamplerConfig) -> 
     dataset = InterestRateData.from_excel(excel)
     write_json(out / "data_manifest.json", dataset.manifest())
     metadata = _run_metadata(config)
-    reference_dir = Path(excel).parent
-    metadata["reference_code_sha256"] = {
-        name: file_digest(reference_dir / name)
-        for name in ["gen_h.m", "gen_beta.m", "interest_rate_rule_estimate_gibbs.m"]
-        if (reference_dir / name).is_file()
-    }
     write_json(out / "run_metadata.json", metadata)
     results, summaries, model_rows, derived_rows, checks = {}, [], [], [], {}
     all_gates, evidence_checks = [], []

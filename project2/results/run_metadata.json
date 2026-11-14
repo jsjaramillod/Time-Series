@@ -13,10 +13,5 @@
     "pandas": "3.1.1",
     "arviz": "0.23.4",
     "matplotlib": "3.11.2"
-  },
-  "reference_code_sha256": {
-    "gen_h.m": "2663bc286409e21595ca05b2aca9ba608ecafb8d5e82b7bc5820bdd08f6697d8",
-    "gen_beta.m": "653c2365d61151f4da992e565912986a4049c0d42e335858e793754615d9e732",
-    "interest_rate_rule_estimate_gibbs.m": "2c1c7d5d94280702bdac5248c416c8a1d8f1c1de0b5218a7fc4ff98cc999a3b6"
   }
 }

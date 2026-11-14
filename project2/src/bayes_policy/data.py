@@ -76,7 +76,7 @@ def _numeric(frame: pd.DataFrame, columns: list[str]):
 
 
 class InterestRateData:
-    """Quarterly policy adapter, matching the supplied MATLAB transformations."""
+    """Quarterly policy data with explicit inflation and output-gap transformations."""
 
     def __init__(self, frame: pd.DataFrame, source_hash: str | None = None):
         required = ["FF", "PI", "PI_Target", "GDP", "GDP_POT"]

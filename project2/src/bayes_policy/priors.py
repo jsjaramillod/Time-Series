@@ -46,7 +46,7 @@ class GammaPrecisionPrior:
 
     @classmethod
     def from_reference(cls, m: float = 1.0, v: float = 3.0):
-        """gen_h.m: E[h]=m, Var[h]=2m²/v => shape=v/2, rate=v/(2m)."""
+        """Mean-degree parameterization: E[h]=m, Var[h]=2m²/v; shape=v/2, rate=v/(2m)."""
         if m <= 0 or v <= 0:
             raise ValueError("Reference m and v must be positive")
         return cls(shape=v / 2, rate=v / (2 * m))

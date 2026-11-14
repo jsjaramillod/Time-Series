@@ -57,7 +57,7 @@ Compare sample windows with otherwise matched settings. Causal interpretation de
 
 ## Inputs, reusable components, and validation
 
-Required inputs are `ci_data.xls` and its programs (`ci.m`, `gen_lambda.m`, `gen_phi.m`, `gen_sig2.m`), frozen ETF prices, `Wide_Data.xlsx`, productivity/hours vintages, and the complete factor and BVAR priors. Missing factor sample dates, ETF coverage, variance parameterizations, and state initialization must be resolved before estimation.
+Required inputs are `ci_data.xls`, documented factor-model specifications, frozen ETF prices, `Wide_Data.xlsx`, productivity/hours vintages, and the complete factor and BVAR priors. Missing factor sample dates, ETF coverage, variance parameterizations, and state initialization must be resolved before estimation.
 
 The architecture will reuse the proposed state-space/filtering design in [Project 07](../project7/README.md) and BVAR machinery in [Project 06](../project6/README.md). Additional responsibilities are factor-path sampling, an expanding-window evaluator for the three point-forecast methods, and a long-run identification transform. These components remain proposed.
 

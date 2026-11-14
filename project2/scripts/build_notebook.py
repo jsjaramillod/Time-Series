@@ -15,7 +15,7 @@ notebook.cells = [
         "it does not contain a second estimation implementation.\n\n"
         "**Questions:** Does an asymmetric output-gap response justify another policy coefficient? "
         "What do financial signals imply about recession probabilities twelve months ahead? "
-        "[Full methods](../docs/methods.md) · [Reference audit](../docs/reference_audit.md) · "
+        "[Full methods](../docs/methods.md) · [Specification audit](../docs/reference_audit.md) · "
         "[Empirical report](../results/report.md)"
     ),
     code(
@@ -66,7 +66,7 @@ notebook.cells = [
     md(
         "## Policy responses and prior sensitivity\n\n"
         "Both policy specifications use independent Normal/Gamma priors. The primary coefficient "
-        "covariance is 10I; the 5I sensitivity follows the supplied MATLAB program. Negative output "
+        "covariance is 10I; the 5I sensitivity evaluates a more concentrated coefficient prior. Negative output "
         "gaps keep their sign. Intervals below are central 90% posterior intervals."
     ),
     code(

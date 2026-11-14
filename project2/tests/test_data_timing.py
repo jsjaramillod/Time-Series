@@ -30,7 +30,7 @@ def test_policy_rejects_invalid_input(policy, kind):
         InterestRateData(frame)
 
 
-def test_returns_match_matlab_and_final_feature_survives(recession):
+def test_simple_returns_and_final_feature_survives(recession):
     features = recession.features()
     np.testing.assert_allclose(features.equity_return_3m, 100 * (np.exp(0.03) - 1))
     assert features.index[0] == pd.Timestamp("1990-04-30")

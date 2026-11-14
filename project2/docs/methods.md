@@ -4,7 +4,7 @@ This document explains the implemented models. All empirical estimates are condi
 
 ## Data contracts
 
-`InterestRateData` accepts one strictly chronological observation per quarter. It rejects missing periods, missing values, duplicate dates, and nonpositive GDP levels. It constructs the same transformations as the supplied MATLAB program:
+`InterestRateData` accepts one strictly chronological observation per quarter. It rejects missing periods, missing values, duplicate dates, and nonpositive GDP levels. The design matrix uses the following transformations:
 
 - Response: `FF[1:]` in the workbook's percentage-point units.
 - Inflation gap: `PI[1:] - PI_Target[1:]`.
@@ -14,9 +14,9 @@ This document explains the implemented models. All empirical estimates are condi
 
 The supplied workbook has 240 rows, 1954Q4–2014Q3. Both regressions therefore use the same **239 responses, 1955Q1–2014Q3**. The design's earlier 1954Q3 start cannot be obtained from this file. No missing initial quarters are fabricated. `PI_Target` is accepted as supplied; its trend-inflation estimation and data vintage have not been independently reconstructed.
 
-`RecessionData` parses six-digit `YYYYMM` dates explicitly, checks monthly continuity, and keeps predictors separate from future outcomes. It constructs the MATLAB **simple** three-month equity return, `100*(SP500_t/SP500_(t-3)-1)`, and the ten-year minus three-month yield spread. The supplied workbook contains 794 monthly rows, January 1960–February 2026. The first usable predictor month is April 1960. The first matched target is April 1961. The complete matched sample has 779 observations; the final twelve predictor rows remain available for forecasting even though their future outcomes are absent.
+`RecessionData` parses six-digit `YYYYMM` dates explicitly, checks monthly continuity, and keeps predictors separate from future outcomes. It constructs the **simple** three-month equity return, `100*(SP500_t/SP500_(t-3)-1)`, and the ten-year minus three-month yield spread. The supplied workbook contains 794 monthly rows, January 1960–February 2026. The first usable predictor month is April 1960. The first matched target is April 1961. The complete matched sample has 779 observations; the final twelve predictor rows remain available for forecasting even though their future outcomes are absent.
 
-Input SHA-256 checksums, effective dates, units, and unavailable provenance information are recorded in the generated manifests. Original data, reference MATLAB programs, and the earlier notebook are not redistributed.
+Input SHA-256 checksums, effective dates, units, and unavailable provenance information are recorded in the generated manifests. The source workbooks are held outside the repository; the empirical artifacts record their checksums and effective samples.
 
 ## Gaussian regression with independent priors
 
@@ -26,7 +26,7 @@ Completing the quadratic in `b` gives posterior precision `P = V^-1 + h X'X` and
 
 The coefficient prior is **not** multiplied by the error variance. This distinction changes both the Gibbs updates and model evidence. Linear systems use Cholesky factorization. If `P=LL'`, the random coefficient increment is obtained by solving `L' d=z` for a standard-normal `z`; solving with `L` would give the wrong covariance.
 
-The reference `gen_h.m` defines Gamma parameters through mean `m` and degrees-of-freedom parameter `v`. Its conversion is:
+A mean-degree parameterization defines the precision prior through mean `m` and degrees-of-freedom parameter `v`. The conversion to shape and rate is:
 
 ```text
 shape = v/2
@@ -36,7 +36,7 @@ scale = 1/rate = 2m/v
 
 Thus `m=1,v=3` gives shape **1.5**, rate **1.5**, mean **1**, and variance **2/3**. The Gibbs sampler stores `sigma2=1/h` and summarizes those transformed draws directly.
 
-The portfolio design specifies `V=10I`, while the supplied MATLAB program uses `V=5I`. The primary run uses `10I`; a separate sensitivity run uses `5I`. Every coefficient, including the intercept and the additional asymmetric slope, receives the stated independent prior. Both regressions use identical observations and the same precision prior.
+The primary coefficient prior uses `V=10I`; a sensitivity run uses the more concentrated `V=5I` to assess dependence on prior dispersion. Every coefficient, including the intercept and the additional asymmetric slope, receives the stated independent prior. Both regressions use identical observations and the same precision prior.
 
 ## Model evidence
 

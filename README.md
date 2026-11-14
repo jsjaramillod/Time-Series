@@ -17,7 +17,7 @@ The central questions connect learning and prediction: how beliefs change with n
 | [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Research design; implementation pending. |
 | [08 — Common Factors, Forecast Evaluation, and Structural Interpretation](project8/README.md) | Can common signals aid prediction, and what long-run assumptions support the interpretation of technology shocks? | Research design; implementation pending. |
 
-Project 02 now includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Projects 03–08 contain research designs; their implementations and reproduced results remain to be developed.
+The [Project 02 executive summary](project2/EXECUTIVE_SUMMARY.md) and [research report (PDF)](project2/docs/monetary_policy_recession_risk.pdf) present its principal findings and limitations. Project 02 includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Projects 03–08 contain research designs; their implementations and reproduced results remain to be developed.
 
 ## Repository contents
 

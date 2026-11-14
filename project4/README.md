@@ -100,7 +100,7 @@ The core analysis reports finite-horizon responses and coefficient sums. Any lat
 
 The required data file is `sim_arma_data.csv`, containing 200 observations on the reference series. The true generating order, generating coefficients, and random seed are not provided in the available specification. They will not be inferred from a filename or invented to recreate the data.
 
-Before estimation, inspect the file's column names, ordering, missing values, and observation count. Record its provenance and checksum. The reference regression and marginal-likelihood programs, including `gen_beta.m`, `gen_h.m`, and `MarginalLikelihoodLinearRegression.m`, or equivalent parameterization documentation, are needed to resolve prior conventions and validate the evidence calculation.
+Before estimation, inspect the file's column names, ordering, missing values, and observation count. Record its provenance and checksum. Document the coefficient and precision priors, including density normalizations, before estimation. Validate the conditional posterior updates and marginal likelihood with analytical or independent numerical controls.
 
 Additional known-parameter simulations can support software validation. They would be explicitly designed test cases, not substitutes for the missing reference dataset. No observed economic dataset is required for the initial scope.
 

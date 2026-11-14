@@ -107,4 +107,4 @@ A separate run assumes an 18-month label delay. This is an illustrative availabi
 
 ## Reproduction and scope
 
-See [the project README](../README.md) for commands and [methods](../docs/methods.md) for assumptions and derivations. The [reference audit](../docs/reference_audit.md) records discrepancies with earlier work. The committed tables and figures are reproduced results; original workbooks and private posterior draw archives are excluded. CI checks scientific controls using generated data and does not claim to rerun inaccessible empirical workbooks.
+See [the project README](../README.md) for commands and [methods](../docs/methods.md) for assumptions and derivations. The [specification audit](../docs/reference_audit.md) records parameterization, transformation, and timing decisions. The committed tables and figures are reproduced results; original workbooks and private posterior draw archives are excluded. CI checks scientific controls using generated data and does not claim to rerun inaccessible empirical workbooks.

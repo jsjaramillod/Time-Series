@@ -1,8 +1,8 @@
 # Project 02: Bayesian Monetary Policy and Recession Risk
 
-**An auditable Python implementation of Bayesian policy-rule estimation, model comparison, and twelve-month recession probabilities.** The project asks whether separate responses to positive and negative output gaps justify extra complexity, and whether financial conditions improve recession probabilities over a simple historical-frequency benchmark.
+This project studies the Federal Reserve’s conditional response to inflation and economic slack, and the information financial conditions contain about recession risk twelve months ahead. It compares symmetric and asymmetric policy rules and evaluates Bayesian probit forecasts against a historical-frequency benchmark.
 
-The contribution combines economic interpretation with reusable software: independent-prior Gaussian Gibbs sampling, Chib marginal likelihoods checked against independent numerical integration, latent-variable probit sampling, and forecast evaluation that separates predictor dates, target dates, and label availability. All estimation logic lives in an importable package; the notebook explains and inspects its outputs.
+The Python package implements independent-prior Gaussian Gibbs sampling, marginal-likelihood comparison, and latent-variable probit estimation. Data preparation, statistical models, sampling, diagnostics, and forecast evaluation have separate responsibilities. The [executive summary](EXECUTIVE_SUMMARY.md) presents the question, findings, and limitations. The [research report (PDF)](docs/monetary_policy_recession_risk.pdf) develops the economic interpretation, tables, and uncertainty estimates; the notebook and methods document the underlying analysis.
 
 ## Findings and evidence
 
@@ -10,11 +10,11 @@ The policy-rule estimates use **239 quarters, 1955Q1–2014Q3**, matching the ac
 
 The evidence calculation agrees with independent quadrature to better than **0.0001 log units** for all four policy specifications. Residual autocorrelation nevertheless challenges the independent-error assumption. Numerical convergence does not establish economic adequacy.
 
-The recession exercise uses the supplied January 1960–February 2026 workbook, the MATLAB simple-return convention, and a twelve-month horizon. Evaluation is explicitly **pseudo-real-time** because historical predictor vintages and verified label-announcement calendars are unavailable. The twelve 2008 targets are all recession months in this workbook, which limits what their forecast scores can establish. The February 2026-origin forecast targets February 2027; its outcome is absent from the input and excluded from scoring.
+The recession exercise uses the supplied January 1960–February 2026 workbook, simple three-month equity returns, and a twelve-month horizon. Evaluation is explicitly **pseudo-real-time** because historical predictor vintages and verified label-announcement calendars are unavailable. The twelve 2008 targets are all recession months in this workbook, which limits what their forecast scores can establish. The February 2026-origin forecast targets February 2027; its outcome is absent from the input and excluded from scoring.
 
 For the 2008 targets, the probit Brier loss is **0.756**, versus **0.777** for the matched frequency benchmark; its negative log score is **2.154**, versus **2.134** for the benchmark. The ranking is mixed across these two proper scores, so the exercise does not establish general predictive superiority. The February 2026-origin probability for February 2027 is approximately **8.6%**, with parameter uncertainty documented in the report.
 
-Read the [empirical report](results/report.md), [executed analysis notebook](notebooks/project02_analysis.ipynb), [model definitions and derivations](docs/methods.md), and [reference audit](docs/reference_audit.md). Machine-readable results retain Monte Carlo uncertainty, diagnostics, effective training windows, and input checksums.
+Read the [empirical report](results/report.md), [executed analysis notebook](notebooks/project02_analysis.ipynb), [model definitions and derivations](docs/methods.md), and [specification audit](docs/reference_audit.md). Machine-readable results retain Monte Carlo uncertainty, diagnostics, effective training windows, and input checksums.
 
 ![Posterior policy uncertainty](results/figures/policy_uncertainty.png)
 
@@ -32,7 +32,7 @@ ruff check src tests
 
 For the recorded dependency versions, install `requirements-repro.txt` before the editable package. That snapshot records the tested environment; it is not a promise of bitwise equality across operating systems or numerical libraries.
 
-Original teaching workbooks and MATLAB sources remain external. Supply their paths explicitly; no absolute personal paths or data credentials are embedded in the package. The input schema is documented in [methods](docs/methods.md). No data download, reconstruction, or imputation is performed silently.
+The input workbooks remain external. Supply their paths explicitly; no absolute personal paths or data credentials are embedded in the package. The input schema is documented in [methods](docs/methods.md). No data download, reconstruction, or imputation is performed silently.
 
 ```bash
 bayes-policy policy \
@@ -99,11 +99,11 @@ project2/
 ├── requirements-repro.txt
 ├── src/bayes_policy/       # models, data, samplers, comparison, evaluation, reporting, CLI
 ├── tests/                 # mathematical, simulation, and timing controls
-├── docs/                  # methods and reference discrepancies
+├── docs/                  # methods and specification choices
 ├── notebooks/             # executed results-oriented analysis
 └── results/               # numeric evidence, diagnostics, manifests, figures, report
 ```
 
-Original workbooks and reference programs are excluded because their redistribution rights are unverified. Private posterior draw archives live under ignored `draws/` directories and can be regenerated from the inputs. The committed artifacts allow inspection without access to those materials.
+Original workbooks are excluded because their redistribution rights are unverified. Private posterior draw archives live under ignored `draws/` directories and can be regenerated from the inputs. The committed artifacts allow inspection without access to those materials.
 
 The [portfolio overview](../README.md) connects this implementation to later lag-uncertainty and forecasting projects. The Gaussian regression, posterior-result, and model-comparison components are designed for reuse; later project implementations remain separate work.
