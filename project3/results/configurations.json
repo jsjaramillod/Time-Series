@@ -1,0 +1,148 @@
+{
+  "ar1_persistent": {
+    "specification": {
+      "coefficients": [
+        0.9
+      ],
+      "intercept": 0.0,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 500,
+      "seed": 20261115
+    },
+    "initial_state_most_recent_first": [
+      0.0
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "8f95d24bdcea31b5aeaabac975d2308604c91b9e348a98467dd7f997888e6ba1"
+  },
+  "ar1_mean_shift": {
+    "specification": {
+      "coefficients": [
+        0.9
+      ],
+      "intercept": 0.5,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 500,
+      "seed": 20261115
+    },
+    "initial_state_most_recent_first": [
+      5.000000000000001
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "8f95d24bdcea31b5aeaabac975d2308604c91b9e348a98467dd7f997888e6ba1"
+  },
+  "ar3_stable": {
+    "specification": {
+      "coefficients": [
+        0.5,
+        0.2,
+        0.2
+      ],
+      "intercept": 0.0,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 0,
+      "seed": 20261116
+    },
+    "initial_state_most_recent_first": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "33e3bc505a9e883f70997d7c307fbaa66c049db4ff3510a5a307b4a16c4a0393"
+  },
+  "ar3_unstable": {
+    "specification": {
+      "coefficients": [
+        0.5,
+        0.3,
+        0.3
+      ],
+      "intercept": 0.0,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 0,
+      "seed": 20261116
+    },
+    "initial_state_most_recent_first": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "33e3bc505a9e883f70997d7c307fbaa66c049db4ff3510a5a307b4a16c4a0393"
+  },
+  "ar2_response": {
+    "specification": {
+      "coefficients": [
+        1.2,
+        -0.3
+      ],
+      "intercept": 0.0,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 500,
+      "seed": 20261117
+    },
+    "initial_state_most_recent_first": [
+      0.0,
+      0.0
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "2d233d4f8992d77b8a5e1fc8cd220fee5aecbf5a4038ae65b24912bd04b89686"
+  },
+  "ar2_boundary": {
+    "specification": {
+      "coefficients": [
+        1.5,
+        -1.0
+      ],
+      "intercept": 0.0,
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 0,
+      "seed": 20261116
+    },
+    "initial_state_most_recent_first": [
+      0.0,
+      0.0
+    ],
+    "initial_state_role": "Lagged observations before generating burn-in and retained values",
+    "innovation_sha256": "33e3bc505a9e883f70997d7c307fbaa66c049db4ff3510a5a307b4a16c4a0393"
+  },
+  "ma2_control": {
+    "specification": {
+      "coefficients": [
+        1.0,
+        1.5,
+        1.3
+      ],
+      "innovation_variance": 1.0
+    },
+    "simulation": {
+      "length": 200,
+      "burn_in": 500,
+      "seed": 20261118
+    },
+    "initial_innovation_state_most_recent_first": [
+      0.0,
+      0.0
+    ],
+    "innovation_sha256": "bec7c7a273eb6928963cda7f99d7112a2062905025ee15a8738417f0d77d399e"
+  }
+}

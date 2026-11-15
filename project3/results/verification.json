@@ -1,0 +1,22 @@
+{
+  "scientific_artifacts_compared": 16,
+  "exact_reproduction_same_environment": true,
+  "all_artifact_checksums_verified": true,
+  "all_package_source_checksums_verified": true,
+  "test_count": 40,
+  "tests_command": "python -m pytest -q --junitxml=.local/pytest-final.xml",
+  "test_result": "passed",
+  "environment_note": "Numerical and notebook stack recorded separately from PDF renderer",
+  "notebook_executed_code_cells": 11,
+  "notebook_cell_errors": 0,
+  "pdf_pages": 6,
+  "pdf_text_and_geometry_pass": true,
+  "pdf_pages_visually_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}

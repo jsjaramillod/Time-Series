@@ -1,0 +1,17 @@
+{
+  "python": "3.12.14",
+  "platform": "Darwin",
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.1.1",
+    "matplotlib": "3.11.2"
+  },
+  "generator": "numpy.random.default_rng / PCG64",
+  "seed": 20261115,
+  "data_source": "Synthetic Gaussian innovations; parameters fixed by experiment design",
+  "units": "Generic model units and periods; no empirical frequency assigned",
+  "root_boundary_tolerance": 1e-10,
+  "response_comparison_rtol": 1e-11,
+  "response_comparison_atol": 1e-11
+}

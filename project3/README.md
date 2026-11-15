@@ -1,142 +1,87 @@
 # Project 03: Persistence and Shock Propagation in Time Series
 
-An economic disturbance can fade quickly, persist for many periods, or reveal that a model has no stable long-run behavior. Understanding that distinction is essential before interpreting a dynamic regression or using it to forecast. This project will use controlled time-series simulations to connect autoregressive parameters with persistence, covariance stationarity, and impulse responses.
+How much of a shock remains after twenty periods, and how much information does a persistent series contain? This project answers those questions with controlled autoregressive and moving-average experiments. Parameters are fixed inputs; observations are synthetic. It separates model stability, shock transmission, and the precision of time averages.
 
-The analysis will explain how shocks travel through a model and verify those responses through equivalent calculations. It will compare persistent, stable, and unstable specifications, distinguish an intercept from an unconditional mean, and show when a cumulative long-run response is well defined.
+**Implemented and executed:** an installable Python package, command-line experiment pipeline, scientific tests, executed notebook, numerical controls, figures, and an English research report. The [executive summary](EXECUTIVE_SUMMARY.md) and [research report (PDF)](docs/persistence_shock_propagation.pdf) present the economic interpretation. The [methods](docs/methods.md) give equations, conventions, and primary references.
 
-**Status: local design draft for review.** This directory currently contains this README. No simulator, notebook, figures, or numerical experiment results have been implemented or reproduced here. The core analysis will use known parameters and synthetic data. Posterior estimation and empirical applications are optional future extensions.
+## Results
 
-## Questions and scope
+- The stable AR(1), AR(2), and AR(3) share an infinite accumulated unit-shock response of **10**, but their totals through horizon 20 are **8.906**, **9.677**, and **7.394**. Their stationary variances also differ: **5.263**, **7.429**, and **3.492**.
+- The AR(2) coefficients **(1.2, -0.3)** produce a response of **1.20** at horizon one, then decay. Its spectral radius is **0.844949**. A first-lag coefficient above one can coexist with a stable multiple-lag process.
+- For a stationary AR(1) with coefficient **0.9**, 200 observations have the mean-estimation precision of **11.05 independent observations**. Ignoring their serial covariance understates the exact mean variance by a factor of **18.10**.
+- Across **10,000** independent stationary replications, a nominal 95% interval assuming independence attains **35.27%** coverage; using known serial covariance gives **95.00%**. Parameters are known in this experiment. These are repeated-sample coverage results, not Bayesian intervals.
+- Changing the AR(1) intercept from zero to 0.5 shifts the stationary mean by **five**, leaving centered dynamics unchanged. The paired paths use identical innovations.
+- The stable and unstable AR(3) spectral radii are **0.939481** and **1.054380**. A unit-circle AR(2) is treated separately. The finite MA(2) control is covariance stationary but its specified innovation representation is noninvertible.
 
-The project addresses four connected questions:
+![Shock responses and accumulated transmission](results/figures/shock_propagation.png)
 
-- How do autoregressive coefficients determine whether a disturbance decays, oscillates, or grows?
-- How can two series with the same innovation variance have very different unconditional variability?
-- How does an intercept determine the level around which a stable process fluctuates?
-- Can companion-matrix calculations and a controlled shock experiment recover the same response at every horizon?
+![The precision of averages under persistence](results/figures/mean_precision.png)
 
-The core scope comprises fixed-parameter AR/MA examples, covariance-stationarity analysis, AR(1) and AR(3) simulations, and AR(2) impulse responses. Simulation here means generating innovations and evolving a known process. MCMC estimation and posterior response bands would require a separate inference stage.
+All units and horizons are generic model units and periods. No empirical coefficients, observed causal effects, or live forecasts are claimed. Finite sample path statistics are not used to prove stationarity. Read the [computed results](results/report.md) for precise values and verification errors.
 
-## Model and dynamic representation
+## Run the project
 
-The simulation model is
+Python 3.12 was used for the recorded artifacts; the package supports Python 3.11 or newer. From this directory:
 
-$$
-y_t=c+\sum_{i=1}^{p}\phi_i y_{t-i}+\varepsilon_t,
-\qquad \varepsilon_t\sim\mathrm{i.i.d.}\ N(0,\sigma^2).
-$$
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev,report]'
+pytest -q
+ruff check src tests scripts
+shock-dynamics --output results --seed 20261115 --replications 10000
+python scripts/build_research_report.py --date 2026-11-15
+```
 
-With the state vector $s_t=(y_t,y_{t-1},\ldots,y_{t-p+1})'$, it becomes
+No external dataset, credential, or data download is required. The version snapshot in `requirements-repro.txt` identifies the environment used for the recorded numerical work; cross-platform bitwise equality is not promised. The report dependency is optional for running the numerical pipeline.
 
-$$
-s_t=c e_1+F s_{t-1}+e_1\varepsilon_t,
-$$
+The pipeline records six AR specifications, one finite MA control, and an independent stationary mean-precision experiment. It writes CSV paths and responses, JSON settings and numerical controls, figures, and a computed Markdown report. A failed deterministic control raises an error after preserving artifacts for diagnosis.
 
-where the first row of the companion matrix $F$ contains the AR coefficients, its first subdiagonal contains ones, and $e_1$ selects the first state component.
+## Read and reproduce the notebook
 
-For the causal representation used here, covariance stationarity requires all companion eigenvalues to have modulus strictly below one. Equivalently, all roots of the AR characteristic polynomial
+Open [the executed notebook](notebooks/project03_analysis.ipynb) in Jupyter. Its default mode reads committed artifacts and calls the importable dynamics API for inspection. It does not contain a second simulator. Set `RUN_SIMULATIONS=1` only to request a full numerical rerun. The notebook validation record contains its checksum, executed-cell count, and error count.
 
-$$
-\phi(z)=1-\phi_1z-\cdots-\phi_p z^p
-$$
+Build an unexecuted copy with `python scripts/build_notebook.py`. Re-execute before replacing a published executed notebook or its validation record. The separate PDF builder reads the generated CSV and JSON results; it does not estimate or simulate new numbers.
 
-must lie outside the unit circle. Finite characteristic roots are reciprocals of nonzero companion eigenvalues. Complex roots must be assessed by their modulus; roots on the boundary require separate treatment from stable roots.
+## Design and interpretation
 
-For stable specifications, the unconditional mean is
+The initial state is always explicit and ordered **most recent lag first**. AR(1) paired paths start at their respective stationary means, share 700 innovations and discard 500 periods. AR(3) comparisons start from identical zero states, share 200 innovations and have no burn-in. Stable initialization at the mean is not claimed to be exact stationary initialization. Only the mean-precision experiment starts from exact stationary Gaussian draws.
 
-$$
-\mu=\frac{c}{1-\sum_{i=1}^{p}\phi_i}.
-$$
-
-For an AR(1), the unconditional variance is
-
-$$
-\operatorname{Var}(y_t)=\frac{\sigma^2}{1-\phi^2}.
-$$
-
-This provides a direct explanation for why variability increases as $|\phi|$ approaches one while innovation variance stays fixed. A finite simulated path will illustrate these properties; it will not establish stationarity by itself.
-
-## Controlled experiments
-
-The following specifications define the initial analysis. Their parameters are fixed inputs, not estimated economic relationships. Gaussian simulation experiments will use innovation variance one unless a configuration explicitly states otherwise.
-
-| Experiment | Specification | Question it isolates |
-| --- | --- | --- |
-| Persistent AR(1) | $c=0$, $\phi=0.9$ | How does a stable but persistent process differ from its innovations? |
-| Mean adjustment | $c=0.5$, $\phi=0.9$ | How does changing the intercept produce an unconditional mean of five without changing persistence? |
-| Stable AR(3) | $c=0$, $\phi=(0.5,0.2,0.2)$ | How do several lags combine to propagate shocks in a stable process? |
-| Unstable AR(3) | $c=0$, $\phi=(0.5,0.3,0.3)$ | How can a change in lag coefficients move the process outside the stability region? |
-| AR(2) response | $c=0$, $\phi=(1.2,-0.3)$ | Do different impulse-response calculations agree? |
-| Unit-circle boundary | $c=0$, $\phi=(1.5,-1)$ | Why do complex roots with modulus one fail the strict stability condition? |
-
-A finite moving-average example,
-
-$$
-y_t=\varepsilon_t+1.5\varepsilon_{t-1}+1.3\varepsilon_{t-2},
-$$
-
-will provide a stationarity control. Its finite innovation representation has constant second moments under white-noise innovations. It helps distinguish the stationarity question from the invertibility question.
-
-Each simulation will record its seed, initial state, sample size, and burn-in. Stable examples can start at their unconditional mean with a documented burn-in to limit initialization effects. Unstable examples will use explicit initial values and finite horizons without assigning them stationary moments. Shared innovation sequences across selected comparisons are a proposed design choice for isolating parameter effects.
-
-## Impulse responses and long-run effects
-
-The response to a one-unit innovation at horizon $j$ is
-
-$$
-\psi_j=\frac{\partial y_{t+j}}{\partial\varepsilon_t}
-=e_1'F^j e_1,\qquad j=0,1,\ldots.
-$$
-
-The AR(2) example will be evaluated through three equivalent calculations:
-
-1. **Companion-matrix powers:** extract the $(1,1)$ element of $F^j$.
-2. **A controlled unit-shock experiment:** initialize the stable process at its mean, apply one unit innovation, set subsequent innovations to zero, and measure deviations from that mean.
-3. **The coefficient recursion:** use $\psi_0=1$, $\psi_j=\sum_{i=1}^{p}\phi_i\psi_{j-i}$, and $\psi_j=0$ for negative indices as a numerical cross-check.
-
-The initial comparison will cover horizons zero through twenty. Extending to horizon one hundred will examine convergence of the cumulative response. For a stable process,
-
-$$
-\sum_{j=0}^{\infty}\psi_j=\frac{1}{1-\sum_{i=1}^{p}\phi_i}.
-$$
-
-For the specified AR(2), this analytical target is ten. The finite-horizon sum must be labeled as an approximation to that limit. It will be reported as the sum of deviations following a one-time innovation, with the shock normalization and horizon stated explicitly.
-
-## Inputs and reproducibility
-
-No external empirical dataset is required for the core project. Inputs will be explicit configurations containing the intercept, coefficient vector, innovation variance, initial values, random seed, simulation length, burn-in, and response horizon.
-
-The implementation will distinguish variance from standard deviation when generating innovations and retain generated series together with their configurations. The analytical targets in this README are validation references, not results from an implemented pipeline.
-
-## Proposed object-oriented design
-
-These components are proposed and have not been implemented.
+Matrix, recursive, and controlled-shock responses cover horizons 0 through 100, including the contemporaneous response of one. An independent SciPy filter provides another implementation. Infinite cumulative sums and stationary moments are available only for models classified as strictly stable. The root boundary tolerance is 1e-10; nearly unit-root cases are flagged rather than assigned unreliable stationary moments.
 
 | Component | Responsibility |
 | --- | --- |
-| `ARSpecification` | Store and validate coefficients, intercept, and innovation variance; expose the model order without conflating parameters with simulation settings. |
-| `ARSimulator` | Generate innovations and recursive paths from a specification, explicit initial state, and random generator; support controlled shock experiments. |
-| `DynamicsAnalyzer` | Construct the companion matrix, inspect eigenvalues and characteristic roots, compute supported stationary moments, and evaluate impulse responses. |
-| `SimulationResult` | Store the generated series, innovation sequence, initial state, and configuration for reproducible comparisons. |
-| `ImpulseResponseResult` | Store horizons, responses, cumulative sums, method labels, and numerical agreement measures. |
+| `ARSpecification`, `MASpecification` | Validate immutable model parameters without simulation settings. |
+| `SimulationConfig` | Validate length, burn-in, and seed. |
+| `ARSimulator`, `MASimulator` | Generate explicit innovations and paths from documented initial histories. |
+| `DynamicsAnalyzer` | Analyze companion eigenvalues, roots, stable moments, responses, and exact mean variance. |
+| `MAAnalyzer` | Calculate finite autocovariances and classify invertibility of the given representation. |
+| `SimulationResult`, `ImpulseResponseResult` | Preserve states, innovations, configurations, response methods, and cumulative sums. |
+| Pipeline and reporting functions | Coordinate experiments and render artifacts without duplicating model logic. |
 
-Plotting functions and a notebook will consume these results without embedding simulation logic in figure code. The simulator and dynamic analysis will remain usable independently: a root calculation should not require a random simulation, and a shock response should not depend on a noisy realized path.
+The design uses composition rather than a large inheritance hierarchy. The numerical analyzers work without generating random paths, and plotting consumes computed results.
 
-## Validation and planned deliverables
+## Scientific verification
 
-Validation will link analytical identities with agreement between computational methods:
+The test suite checks reciprocal root/eigenvalue relationships, zero trailing coefficients, boundary cases, analytic AR(1) moments, Lyapunov residuals, variance from response sums, an independent Toeplitz covariance calculation, shock normalization and initial-state ordering, three response methods against SciPy filtering, variance-to-standard-deviation conversion, finite MA covariance and invertibility, malformed inputs, and seeded reproduction.
 
-- Check companion-matrix dimensions and eigenvalue/root relationships, including complex and unit-circle cases. Document numerical tolerance and flag values near the boundary.
-- Verify the AR(1) mean and variance formulas and the specified mean adjustment. Sample moments will be interpreted with finite-sample variation and persistence in mind.
-- Check the stable and unstable AR(3) classifications algebraically as well as numerically.
-- Require matrix-based, controlled-shock, and recursive responses to agree within a stated floating-point tolerance over the comparison horizon.
-- Compare finite cumulative responses with their analytical limit only when stability conditions hold. Preserve the one-unit shock normalization and horizon-zero response.
-- Check that fixed seeds and configurations reproduce paths, and that burn-in and initial conditions are recorded rather than hidden in defaults.
+Run `python scripts/verify_artifacts.py` to verify the recorded source, numerical, notebook, and PDF identities.
 
-Planned deliverables are a small Python implementation, a reproducible analysis notebook, configuration records, simulation comparisons, impulse-response and cumulative-response plots, and a short interpretation of the connection between stability, persistence, and long-run effects. No empirical findings or posterior uncertainty bands are claimed at the design stage.
+The pipeline additionally records all numerical discrepancies in `results/numerical_validation.json`. Source and output SHA-256 hashes are in `results/manifest.json`. CI runs generated scientific controls and does not depend on private data. The known-parameter setting permits exact checks; an empirical extension would need a dataset, identification assumptions, and an inference stage.
 
-## Connections and optional extensions
+## Repository contents
 
-This project complements [monetary policy and recession risk](../project2/README.md) by examining the dynamics underlying lagged relationships. It supplies a foundation for later lag selection, multi-step forecasting, and interpreting dynamic responses.
+```text
+project3/
+├── pyproject.toml
+├── requirements-repro.txt
+├── EXECUTIVE_SUMMARY.md
+├── src/shock_dynamics/
+├── tests/
+├── scripts/                 # notebook and PDF builders
+├── docs/                    # derivations and research PDF
+├── notebooks/               # executed analysis
+└── results/                 # paths, responses, precision experiment, controls, figures
+```
 
-Reusable interfaces, shared-innovation comparisons, and explicit numerical agreement checks are proposed engineering additions to the core analytical and simulation scope. Further extensions could investigate a real economic series or propagate posterior coefficient draws into response distributions. Those would require a separately specified dataset or inference model; neither is part of the current implementation plan.
+This project complements [monetary policy and recession risk](../project2/README.md) by studying mechanisms behind lagged dynamics. [Project 04](../project4/README.md) extends the research design to uncertainty about lag order; its implementation remains pending.

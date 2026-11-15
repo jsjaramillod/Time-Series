@@ -1,0 +1,22 @@
+name: Project 03 validation
+on:
+  push:
+    paths: ["project3/**", ".github/workflows/project3.yml"]
+  pull_request:
+    paths: ["project3/**", ".github/workflows/project3.yml"]
+permissions:
+  contents: read
+jobs:
+  scientific-controls:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e '.[dev]'
+      - run: ruff check src tests scripts
+      - run: pytest -q

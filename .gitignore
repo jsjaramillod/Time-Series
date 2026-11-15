@@ -6,6 +6,8 @@ __pycache__/
 *.egg-info/
 project2/.venv/
 project2/.local/
+project3/.venv/
+project3/.local/
 project2/data/private/
 project2/results/draws/
 project2/results/**/draws/

@@ -1,0 +1,25 @@
+{
+  "specification": {
+    "coefficients": [
+      1.0,
+      1.5,
+      1.3
+    ],
+    "innovation_variance": 1.0
+  },
+  "covariance_stationary": true,
+  "invertible": false,
+  "root_moduli": [
+    0.8770580193070291,
+    0.8770580193070291
+  ],
+  "autocovariances_0_to_4": [
+    4.94,
+    3.45,
+    1.3,
+    0.0,
+    0.0
+  ],
+  "stationary_mean": 0.0,
+  "stationary_variance": 4.94
+}

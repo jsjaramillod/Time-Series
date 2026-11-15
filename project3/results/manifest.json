@@ -1,0 +1,29 @@
+{
+  "source_sha256": {
+    "__init__.py": "4b86192721fb8151d1905136124a0daf578b37cbd15b4e6248fa6e6d2d6e9ed3",
+    "analysis.py": "b12002727e7d912a4894c30eb779d825c5459bb79a67f38165ac2a40b5f6608a",
+    "cli.py": "fe1e579b41b60fe65b2383bfe10fb563aeb2182426e384bed86475e516924783",
+    "models.py": "77c7ce364ce1a8c50739f73fa93f476aa44f63a7c817eb9866106568c5efae33",
+    "pipeline.py": "3e6d4bec69941aa1af571ea966add38ccaf8d0f90aa21bba721db71faa2d7760",
+    "reporting.py": "1d751269c10dd5be56aa77346afe138fc4b48fe735684ff0154c93bc6167a296",
+    "simulation.py": "a2d3a50ccb455d6182792f07693280236276edbac773a65a3857fc3a39b2b789"
+  },
+  "artifact_sha256": {
+    "configurations.json": "463eda98ca9c548efbe6362303638f7046c5ce479b1d747dc902e4471d939250",
+    "dynamics_summary.csv": "0329f9cd63796a053e79158c560f31b4cd1602cb930f3c99b4f075481a94c4ba",
+    "figures/companion_eigenvalues.png": "53e06c0d1ea9b2ef0286fa2091f2c7aa65d81d7efa5a2c38385dc42a68fe7bee",
+    "figures/ma_autocovariance.png": "a6743e7e64f6ec911482115be4d27ad62dc29729f8d7a3a482e023190bb71322",
+    "figures/mean_adjustment.png": "28f72a1e7503f6891885a9ecadb0efc0f419217ffc6e74c2119924745fb79c37",
+    "figures/mean_precision.png": "05ba96d21ace6ef21e477ee8c372622ed168e825b11fccd09de757836d9b210b",
+    "figures/shock_propagation.png": "b355f267fa8a7f61eb41d72e1536d0b7ad9e64a457e43139b8b3481aa16162aa",
+    "figures/stability_paths.png": "7b3e388cea5712641f274620e16469f20710e8cd839212c33e4bdc1fcf9e349e",
+    "impulse_responses.csv": "38202643ddece174a3fd5f2a3cd30b91bf0484f21f8ccbcf6e8ba086479e11b9",
+    "ma_control.json": "add6ee825e5e38f054d8f514f6a95d66c575cc9912fd5695b9085b0165483e29",
+    "mean_precision.json": "b6120940aa1affcbb8d3b32df19974c9ee78fdaaa6c45c77499ecccafdb78ac7",
+    "numerical_validation.json": "3ed40fec5e4bb57fb763f3138459dea95a976aa473193700e7d2183bf185f8d9",
+    "report.md": "853c7e8517d0f2d5ef170a2e02f5c0aa562639d3164a4c6d6a415d838a405f2a",
+    "run_metadata.json": "f5c3683b07a29bd46ba550bc9a947ee01f34edc34b2517ab9ef0057d44f36b3f",
+    "sample_mean_replications.csv": "bc2f878182ca3a180c1c7502a9a816d59f3685eee9fe3a485265b026d7bcd253",
+    "simulation_paths.csv": "fe0ae1767b139915b8dcf6d23a605e9857266ded63516f8229048f5cf7fd8099"
+  }
+}

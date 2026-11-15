@@ -1,0 +1,30 @@
+{
+  "model": {
+    "coefficients": [
+      0.9
+    ],
+    "intercept": 0.0,
+    "innovation_variance": 1.0
+  },
+  "seed": 20261215,
+  "replications": 10000,
+  "length": 200,
+  "initialization": "Independent draws from the exact stationary Gaussian distribution",
+  "stationary_variance": 5.263157894736843,
+  "exact_mean_variance": 0.47631578949039405,
+  "independence_mean_variance": 0.026315789473684216,
+  "variance_inflation_factor": 18.10000000063497,
+  "effective_independent_observations": 11.04972375651844,
+  "exact_mean_standard_error": 0.6901563514816001,
+  "independence_standard_error": 0.16222142113076254,
+  "empirical_mean": -0.0029908807144799344,
+  "empirical_mean_variance": 0.47637587335206466,
+  "mean_variance_mc_standard_error": 0.0067364593260849336,
+  "correlation_aware_coverage": 0.95,
+  "independence_coverage": 0.3527,
+  "exact_correlation_aware_coverage": 0.95,
+  "exact_independence_coverage": 0.3549789833748267,
+  "coverage_mc_standard_error_at_95_percent": 0.0021794494717703367,
+  "ar1_shock_half_life_periods": 6.578813478960585,
+  "interpretation": "Repeated-sample coverage under known parameters; not posterior intervals"
+}
