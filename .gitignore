@@ -16,3 +16,4 @@ project2/data/private/
 project2/results/draws/
 project2/results/**/draws/
 .ipynb_checkpoints/
+project*/docs/guide_es.md
