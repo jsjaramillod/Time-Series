@@ -1,0 +1,22 @@
+name: Project 04 validation
+on:
+  push:
+    paths: ["project4/**", "project2/src/bayes_policy/**", "project3/src/shock_dynamics/**", ".github/workflows/project4.yml"]
+  pull_request:
+    paths: ["project4/**", "project2/src/bayes_policy/**", "project3/src/shock_dynamics/**", ".github/workflows/project4.yml"]
+permissions:
+  contents: read
+jobs:
+  scientific-controls:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ../project2 -e ../project3 -e '.[dev]'
+      - run: ruff check src tests scripts
+      - run: pytest -q

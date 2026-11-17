@@ -1,0 +1,8 @@
+{
+  "notebook": "notebooks/project04_analysis.ipynb",
+  "sha256": "e9e93c11b43383ed9ea0b22dd311788f0d1cb64be8c8e85a2e712cff09c075ac",
+  "numerical_manifest_sha256": "278e9b2615957b6c3567c3e3cccd04944631bf1dc237974d4906feed38dec5d1",
+  "cells": 20,
+  "executed_code_cells": 10,
+  "cell_errors": 0
+}

@@ -1,0 +1,14 @@
+# Direct external versions used for numerical and notebook verification.
+# Install the local project2, project3, and project4 packages separately as in the README.
+numpy==2.5.4
+scipy==1.18.1
+pandas==3.1.1
+matplotlib==3.11.2
+arviz==0.23.4
+openpyxl==3.1.5
+pytest==9.2.0
+ruff==0.17.5
+nbformat==5.11.1
+nbclient==0.11.0
+ipykernel==7.4.0
+setuptools==84.2.1

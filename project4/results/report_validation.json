@@ -1,0 +1,29 @@
+{
+  "report_date": "2026-11-17",
+  "output": "docs/lag_uncertainty_model_averaging.pdf",
+  "source_sha256": {
+    "results/study_summary.json": "6fbe8dc3d48ee3c1c250b511888288f372b7ed2df89d841b90fe2df306291419",
+    "results/model_comparison.csv": "2d313d5aecd6a562485623e30aef685e1bfb5325d2212b85891ae2a6ed40af2b",
+    "results/impulse_responses.csv": "299fb1621520dc866a498749773a97054596e81b2b0f5557c7446647492ea1a4",
+    "results/posterior_parameters.csv": "b0080579c5b4ce3413d2c4241b591d02f6d7d4afeed6b0505e44317b6e9b89a3",
+    "results/posterior_derived.csv": "944b390d8c2902ebed56b4550de80404a319b2893f54a2901d1d8dab370cf6ca",
+    "results/scalar_integration_controls.csv": "431d0b2d20bc9ffc2edcbf1233630a27d5983327f6ea43ca6a046c9dcd9b2720",
+    "results/stability.csv": "7047daa0400c9ecb582e9a956f4cb123bd3f93f04ecc376fb90366ff28cddcc0",
+    "results/evidence_point_checks.csv": "2a9c50217c0ccb1323c532f4f100e637571492df2fcc62d913182b010afc8843",
+    "results/additional_prior_sensitivity.csv": "e2c0d281e1de58e1b5f8c4b74ed47f3987944fd0e8606c60f6e7b0585e304b1b",
+    "results/run_metadata.json": "9244ee6e78df65e1365bc623191c2a9cb59dbdfc484e85b2f8f2165075f0239d",
+    "results/verification.json": "c6af94ca5cc1aab4c7caa14a176fcff44fe719b1e336504a6c4b6db353adfe11",
+    "results/validation.json": "4f41fe99b01d2c135c8cfaa2a77474f2fb5b91fbe657f0e4642d192b4c78e791",
+    "results/figures/ar8_chain_traces.png": "6226fdf3ad5f5d6058df3119a904dd202c6f7bc2db80def5d2ae27c2c58fd377",
+    "results/figures/model_average_equation.png": "7dd69a178218bd94dd35ba65a9bb6605855488de6507faece0681ec3a1dbaba8",
+    "results/figures/lag_order_probabilities.png": "e2e27421f86207e6b3fdd4c2addfe382de24af83a5f267c0958d207b078eba22",
+    "results/figures/response_uncertainty.png": "a67c657a00c330a17548ff54f49384177088cf9dc9eeb4b205e45aec72d5dca6",
+    "results/figures/persistence_posteriors.png": "c4c35e6adb23197ee36c3e70b03aa3ca2bc8df57309c703dbf02ac6248712454",
+    "results/figures/variance_equation.png": "c740734adb06cf5e3f917efe1e5dbabe7cfa2fd18226e6835a6c51c486960afa"
+  },
+  "builder_sha256": {
+    "scripts/build_research_report.py": "89287ee1d9e7add52981694b4c2d7bbd9137c2352752d5173d93f5e959a8f704",
+    "scripts/report_style.py": "a3b68a29bcf7d1a21f4d5ec458c8ea811b8f3e57fb8268782d0d56be17fec0fc"
+  },
+  "pdf_sha256": "dd58561a3804fa49da1461c5e9c82700660b8a82ed9c8574e0f0c4eb6063e031"
+}

@@ -10,6 +10,11 @@ from .models import BayesianProbit, GaussianRegression
 from .results import PosteriorResult
 
 
+def _observation_label(value):
+    """Preserve dated labels while allowing explicitly ordinal observation indices."""
+    return str(value.date()) if hasattr(value, "date") else str(value)
+
+
 @dataclass(frozen=True)
 class SamplerConfig:
     draws: int = 10000
@@ -62,8 +67,8 @@ class GaussianGibbsSampler:
                 "precision_prior_shape": model.precision_prior.shape,
                 "precision_prior_rate": model.precision_prior.rate,
                 "n": len(model.data.y),
-                "start": str(model.data.dates[0].date()),
-                "end": str(model.data.dates[-1].date()),
+                "start": _observation_label(model.data.dates[0]),
+                "end": _observation_label(model.data.dates[-1]),
                 "data_fingerprint": model.data.fingerprint(),
             },
         )

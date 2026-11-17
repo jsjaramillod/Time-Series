@@ -1,0 +1,18 @@
+{
+  "source_file": "sim_arma_data.csv",
+  "source_sha256": "27c539ef347e267b68611499b7b7c810fc8144a91cf82ceb279a1d7550bbbd5c",
+  "header": null,
+  "observations": 200,
+  "conditioning_observations": 8,
+  "modeled_observations": 192,
+  "target_positions_inclusive": [
+    9,
+    200
+  ],
+  "index_type": "one-based ordinal observation positions; no calendar assigned",
+  "sample_mean": 0.09065000000000001,
+  "sample_sd_ddof1": 2.424222006994405,
+  "data_generation_parameters": "unverified",
+  "generation_seed": "unverified",
+  "provenance": "user-supplied series; original generation and redistribution rights unverified"
+}

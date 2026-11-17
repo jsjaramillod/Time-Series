@@ -1,0 +1,68 @@
+{
+  "0.5": {
+    "method": "joint contiguous batches preserving each chain; common pooled evaluation point",
+    "batch_size": 1000,
+    "batches": 40,
+    "mcse": {
+      "bma_mean": 0.00010367146748391561,
+      "bma_probability_sum_above_one": 4.578366900244793e-10,
+      "bma_p05": 0.0002487102100810604,
+      "bma_median": 0.00013320431107786515,
+      "bma_p95": 0.0002765785303868321,
+      "weight_ar1": 4.065433858892849e-10,
+      "weight_ar2": 2.301122144454552e-05,
+      "weight_ar3": 1.1218603443188832e-05,
+      "weight_ar4": 1.9162098977104406e-05,
+      "weight_ar5": 7.631692328557646e-06,
+      "weight_ar6": 1.416914909962414e-06,
+      "weight_ar7": 2.195911346013072e-07,
+      "weight_ar8": 2.597018748106915e-08
+    },
+    "interpretation": "Numerical Monte Carlo uncertainty; distinct from posterior model uncertainty",
+    "zero_event_note": "Zero sampled tail events do not establish zero posterior probability"
+  },
+  "1.0": {
+    "method": "joint contiguous batches preserving each chain; common pooled evaluation point",
+    "batch_size": 1000,
+    "batches": 40,
+    "mcse": {
+      "bma_mean": 0.00010601645776346773,
+      "bma_probability_sum_above_one": 5.40970741956638e-09,
+      "bma_p05": 0.00024374203088932278,
+      "bma_median": 0.00015930984483782072,
+      "bma_p95": 0.0003284308011074222,
+      "weight_ar1": 3.6209319677827537e-10,
+      "weight_ar2": 1.890339360466909e-05,
+      "weight_ar3": 9.897250913665657e-06,
+      "weight_ar4": 1.0908308120767068e-05,
+      "weight_ar5": 3.5927952457669152e-06,
+      "weight_ar6": 5.25697759324737e-07,
+      "weight_ar7": 4.188044514902814e-08,
+      "weight_ar8": 4.069682295290349e-09
+    },
+    "interpretation": "Numerical Monte Carlo uncertainty; distinct from posterior model uncertainty",
+    "zero_event_note": "Zero sampled tail events do not establish zero posterior probability"
+  },
+  "0.25": {
+    "method": "joint contiguous batches preserving each chain; common pooled evaluation point",
+    "batch_size": 1000,
+    "batches": 40,
+    "mcse": {
+      "bma_mean": 9.615615483012026e-05,
+      "bma_probability_sum_above_one": 9.306800807998214e-08,
+      "bma_p05": 0.00018251774608431847,
+      "bma_median": 0.0001452771304189512,
+      "bma_p95": 0.0002315982403520466,
+      "weight_ar1": 4.5333794989331947e-10,
+      "weight_ar2": 3.2077123193277314e-05,
+      "weight_ar3": 1.3237420633829126e-05,
+      "weight_ar4": 2.0719696332006954e-05,
+      "weight_ar5": 1.8531451473522646e-05,
+      "weight_ar6": 3.7461447628779195e-06,
+      "weight_ar7": 7.937636020835716e-07,
+      "weight_ar8": 1.430500392680145e-07
+    },
+    "interpretation": "Numerical Monte Carlo uncertainty; distinct from posterior model uncertainty",
+    "zero_event_note": "Zero sampled tail events do not establish zero posterior probability"
+  }
+}

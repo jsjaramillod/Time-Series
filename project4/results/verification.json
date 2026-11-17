@@ -1,0 +1,280 @@
+{
+  "project4_tests_passed": 30,
+  "project2_tests_passed": 22,
+  "project4_test_command": "python -m pytest -q",
+  "project2_test_command": "python -m pytest project2/tests -q",
+  "replayed_fits": 24,
+  "all_retained_draw_arrays_exact_match": true,
+  "all_fit_metadata_match": true,
+  "reproduced_scalar_resample_arrays": 3,
+  "public_scientific_artifacts_compared": 25,
+  "public_scientific_artifacts_exact_match": true,
+  "source_data_sha256": "27c539ef347e267b68611499b7b7c810fc8144a91cf82ceb279a1d7550bbbd5c",
+  "environment_scope": "exact equality in the same recorded environment; cross-platform bitwise equality not claimed",
+  "fit_array_checks": [
+    {
+      "coefficient_variance": 0.5,
+      "order": 1,
+      "shape": [
+        4,
+        10000,
+        3
+      ],
+      "draw_array_sha256": "1d5fac4ad6c0ecf614d1cc672b923f24a2f247d5649c0a5b3b729e526dba58c4",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 2,
+      "shape": [
+        4,
+        10000,
+        4
+      ],
+      "draw_array_sha256": "7981c72d966c3593aab821d8ee0a2a2c24f5d56578f1ddfa6413e8a796d528bc",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 3,
+      "shape": [
+        4,
+        10000,
+        5
+      ],
+      "draw_array_sha256": "7894222c3684220b15dceff900e7542dc3251f6a2741dacb032abc26fa158266",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 4,
+      "shape": [
+        4,
+        10000,
+        6
+      ],
+      "draw_array_sha256": "8757f6008f740267ef2e656e6b81c556d1f6c641ed4c439615730ad7918a6bf5",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 5,
+      "shape": [
+        4,
+        10000,
+        7
+      ],
+      "draw_array_sha256": "106f29a774a7efa1f122ba4492c161595b2b59fb9182346df4d728720daab378",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 6,
+      "shape": [
+        4,
+        10000,
+        8
+      ],
+      "draw_array_sha256": "60cf9e766074ef8572f2c8da6aaf85dca5428a310c423843373d20c9e0fd972b",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 7,
+      "shape": [
+        4,
+        10000,
+        9
+      ],
+      "draw_array_sha256": "44c79f607cc8a25f01ba23eda7ee4e4efab5bc6251f067342df4d07756efdbae",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.5,
+      "order": 8,
+      "shape": [
+        4,
+        10000,
+        10
+      ],
+      "draw_array_sha256": "2470a7acfad4aaaff89cf27f2454b66ad84f37da22181f6fd71ef8443ae95943",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 1,
+      "shape": [
+        4,
+        10000,
+        3
+      ],
+      "draw_array_sha256": "8cb13d878d72fcd5fd7a7b98f958b54a472193397a800957017885912f3038a9",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 2,
+      "shape": [
+        4,
+        10000,
+        4
+      ],
+      "draw_array_sha256": "be3a4e8f2082d7900d81709d19b1c70d43d6abdf2debf488d6cf80e37af74769",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 3,
+      "shape": [
+        4,
+        10000,
+        5
+      ],
+      "draw_array_sha256": "4b6ef5cdfbf60d5f27d9fb5c16e428fdb960339b5e9d716ec0225d14629b9716",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 4,
+      "shape": [
+        4,
+        10000,
+        6
+      ],
+      "draw_array_sha256": "06ec60042279b6ebcd0ceb33528c95502cea4ac2aa870ad92b71dc0563d28c21",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 5,
+      "shape": [
+        4,
+        10000,
+        7
+      ],
+      "draw_array_sha256": "e222ac88f8efb7d4200809ecc18842f20c5c480cc88414f6f85623d8c833935d",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 6,
+      "shape": [
+        4,
+        10000,
+        8
+      ],
+      "draw_array_sha256": "6446538d3f7fef83219a4db24e670c855206c333b57a8ac361b856f28817b367",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 7,
+      "shape": [
+        4,
+        10000,
+        9
+      ],
+      "draw_array_sha256": "26974e87509b4f259fc1da80f8a33adaf059ff04538c920435f9e48252d521c8",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 1.0,
+      "order": 8,
+      "shape": [
+        4,
+        10000,
+        10
+      ],
+      "draw_array_sha256": "2df56182537bcde9750df39226cfc35f36824e943be7971b8c5b23ffa5942d54",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 1,
+      "shape": [
+        4,
+        10000,
+        3
+      ],
+      "draw_array_sha256": "c6d9a246f82a2f4ffccf042aba306bad892599dd230ebf5cfc0e51792c0676dc",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 2,
+      "shape": [
+        4,
+        10000,
+        4
+      ],
+      "draw_array_sha256": "0cf0b2b7fc13af0f3732af817d09baa1fed8a52b2244be9cb43cacd44608fe24",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 3,
+      "shape": [
+        4,
+        10000,
+        5
+      ],
+      "draw_array_sha256": "6811e51739522a035134a3181b15956d1e234aff4e6ea5ce5cc5645d34d95137",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 4,
+      "shape": [
+        4,
+        10000,
+        6
+      ],
+      "draw_array_sha256": "e59661f588e9ec061957c6782936fff01a371bfcf1f12d3dc7e0558f71348470",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 5,
+      "shape": [
+        4,
+        10000,
+        7
+      ],
+      "draw_array_sha256": "3e051ede3217d1dae0ca1bd79187507a5dd5488e019c3b8fb2432e3f0edc3cc6",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 6,
+      "shape": [
+        4,
+        10000,
+        8
+      ],
+      "draw_array_sha256": "3421f659c0262265d78f046331dcbc29a514e725e7ce289c2538f4086214160a",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 7,
+      "shape": [
+        4,
+        10000,
+        9
+      ],
+      "draw_array_sha256": "c338e566b2a0464f4b376074d58df4e198b0331dd654cefe98a7c26fd724bbba",
+      "exact_match": true
+    },
+    {
+      "coefficient_variance": 0.25,
+      "order": 8,
+      "shape": [
+        4,
+        10000,
+        10
+      ],
+      "draw_array_sha256": "6c3980ce4677de7a7b1e7b2c6ff423f6e0f5f07de770115edd5933376e29f3fd",
+      "exact_match": true
+    }
+  ]
+}

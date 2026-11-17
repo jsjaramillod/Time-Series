@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lag-uncertainty"
+version = "0.1.0"
+description = "Bayesian lag-order comparison and model-averaged persistence inference"
+requires-python = ">=3.11"
+dependencies = ["bayes-policy==0.1.0", "shock-dynamics==0.1.0", "numpy>=1.26,<3", "scipy>=1.12,<2", "pandas>=2.2,<4", "matplotlib>=3.8,<4", "arviz>=0.20,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "nbformat>=5,<6", "nbclient>=0.10,<1", "ipykernel>=6,<8"]
+report = ["reportlab>=4,<5"]
+
+[project.scripts]
+lag-uncertainty = "lag_uncertainty.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

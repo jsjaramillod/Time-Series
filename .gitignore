@@ -8,6 +8,10 @@ project2/.venv/
 project2/.local/
 project3/.venv/
 project3/.local/
+project4/.venv/
+project4/.local/
+project4/data/private/
+project4/results/draws/
 project2/data/private/
 project2/results/draws/
 project2/results/**/draws/

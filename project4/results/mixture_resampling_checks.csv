@@ -1,0 +1,4 @@
+coefficient_variance,resamples,seed,weighted_empirical_mean,resample_mean,resampling_standard_error_of_mean,interpretation
+0.5,100000,20271116,0.8477078833829841,0.8477030607065145,0.00010929111432335466,Resamples from finite model-specific Gibbs pools; not additional independent Gibbs information
+1.0,100000,20281116,0.8503184215126498,0.8502821987036111,0.00010490027992180576,Resamples from finite model-specific Gibbs pools; not additional independent Gibbs information
+0.25,100000,20291116,0.8428272826771155,0.842819348513642,0.0001147090344272018,Resamples from finite model-specific Gibbs pools; not additional independent Gibbs information
