@@ -1,0 +1,23 @@
+name: Project 05 validation
+on:
+  push:
+    paths: ["project5/**", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
+  pull_request:
+    paths: ["project5/**", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
+permissions:
+  contents: read
+jobs:
+  forecast-controls:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ../project2 -e ../project3 -e ../project4 -e '.[dev]'
+      - run: ruff check src tests scripts
+      - run: pytest -q
+      - run: python scripts/verify_results.py

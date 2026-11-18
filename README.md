@@ -12,12 +12,12 @@ The central questions connect learning and prediction: how beliefs change with n
 | [02 — Bayesian Monetary Policy and Recession Risk](project2/README.md) | Do policy responses differ across economic conditions, and which financial signals anticipate recessions? | Implemented Python package, scientific tests, empirical policy analysis, and pseudo-real-time recession forecasts; documented model and data limitations. |
 | [03 — Persistence and Shock Propagation in Time Series](project3/README.md) | How do autoregressive dynamics determine stability, persistence, and the response to a controlled shock? | Implemented Python package, controlled simulations, scientific controls, executed notebook, and research report. |
 | [04 — Lag Uncertainty and Bayesian Model Averaging](project4/README.md) | How much history does a model need, and how does lag uncertainty affect inference about persistence? | Implemented conditional AR comparison, Gibbs sampling, independent evidence controls, model-averaged posteriors, and research report. |
-| [05 — Probabilistic GDP Forecasts and Growth at Risk](project5/README.md) | How much could U.S. GDP grow over the next year, and how well do predictive distributions describe downside outcomes? | Research design; implementation pending. |
+| [05 — Probabilistic GDP Forecasts and Growth at Risk](project5/README.md) | How much could U.S. GDP grow over the next year, and how well do predictive distributions describe downside outcomes? | Executed quarterly GDP backtest, release calendar, downside-risk forecasts and pandemic sensitivity. |
 | [06 — Macroeconomic Information and Payroll Forecasts](project6/README.md) | When does additional macroeconomic and financial information justify greater complexity in one-month employment forecasts? | Research design; implementation pending. |
 | [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Research design; implementation pending. |
 | [08 — Common Factors, Forecast Evaluation, and Structural Interpretation](project8/README.md) | Can common signals aid prediction, and what long-run assumptions support the interpretation of technology shocks? | Research design; implementation pending. |
 
-The [Project 02 executive summary](project2/EXECUTIVE_SUMMARY.md) and [research report (PDF)](project2/docs/monetary_policy_recession_risk.pdf) present its principal findings and limitations. Project 02 includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Project 03 adds controlled persistence and shock-transmission experiments, exact mean-precision calculations, and an [English research report](project3/docs/persistence_shock_propagation.pdf). Project 04 carries lag-order uncertainty into coefficient-sum and response posteriors; its [executive summary](project4/EXECUTIVE_SUMMARY.md) and [research report](project4/docs/lag_uncertainty_model_averaging.pdf) document model preference, prior sensitivity, and numerical controls. Projects 05–08 contain research designs; their implementations and reproduced results remain to be developed.
+The [Project 02 executive summary](project2/EXECUTIVE_SUMMARY.md) and [research report (PDF)](project2/docs/monetary_policy_recession_risk.pdf) present its principal findings and limitations. Project 02 includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Project 03 adds controlled persistence and shock-transmission experiments, exact mean-precision calculations, and an [English research report](project3/docs/persistence_shock_propagation.pdf). Project 04 carries lag-order uncertainty into coefficient-sum and response posteriors; its [executive summary](project4/EXECUTIVE_SUMMARY.md) and [research report](project4/docs/lag_uncertainty_model_averaging.pdf) document model preference, prior sensitivity, and numerical controls. Project 05 evaluates GDP forecasts across 89 quarterly and 86 annual outcomes. Read the [growth-at-risk report](project5/docs/gdp_growth_at_risk.pdf). Projects 06–08 contain research designs; their implementations and reproduced results remain to be developed.
 
 ## Repository contents
 
@@ -58,7 +58,13 @@ Time-Series/
 │   ├── notebooks/
 │   └── results/
 ├── project5/
-│   └── README.md
+│   ├── README.md
+│   ├── src/gdp_risk/
+│   ├── data/
+│   ├── tests/
+│   ├── notebooks/
+│   ├── docs/
+│   └── results/
 ├── project6/
 │   └── README.md
 ├── project7/
@@ -67,13 +73,13 @@ Time-Series/
     └── README.md
 ```
 
-Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. Project 02 has its own installable package, dependency specification, command-line pipelines, and scientific test suite; see its README for reproduction commands. Project 03 also has an installable numerical package and reproducible pipeline; its synthetic experiments require no external dataset. Project 04 reuses the shared packages for conditional AR comparison and Bayesian model averaging; its source series remains external. Projects 05–08 have no executable pipelines yet.
+Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. Project 02 has its own installable package, dependency specification, command-line pipelines, and scientific test suite; see its README for reproduction commands. Project 03 also has an installable numerical package and reproducible pipeline; its synthetic experiments require no external dataset. Project 04 reuses the shared packages for conditional AR comparison and Bayesian model averaging; its source series remains external. Project 05 includes an executable forecast evaluation and verified source fingerprints. Projects 06–08 remain research designs.
 
 <a id="research-progression"></a>
 
 ## Econometric themes
 
-These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01. Policy-response inference and recession probabilities are implemented in Project 02. Persistence and controlled shock transmission are implemented in Project 03, and lag-order comparison and model-averaged inference in Project 04. Remaining forecasting themes are specified in the designs for Projects 05–08.
+These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01. Policy-response inference and recession probabilities are implemented in Project 02. Persistence and controlled shock transmission are implemented in Project 03, and lag-order comparison and model-averaged inference in Project 04. Project 05 evaluates predictive distributions for GDP. The remaining designs cover Projects 06–08.
 
 | Theme | Economic or statistical question | Methods and application |
 | --- | --- | --- |

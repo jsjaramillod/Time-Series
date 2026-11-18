@@ -17,3 +17,6 @@ project2/results/draws/
 project2/results/**/draws/
 .ipynb_checkpoints/
 project*/docs/guide_es.md
+
+project5/.local/
+project5/.venv/
