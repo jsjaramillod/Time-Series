@@ -9,7 +9,7 @@ notebook = nbf.v4.new_notebook()
 md, code = nbf.v4.new_markdown_cell, nbf.v4.new_code_cell
 notebook.cells = [
     md(
-        "# Bayesian Monetary Policy and Recession Risk\n\n"
+        "# Bayesian Monetary Policy and Recession Risk\n\nIn my second doctoral assignment, the simpler Federal Reserve policy rule received **95.06%** posterior probability. Re-estimation gives **95.06%** with the same coefficient prior. The **96.44%** result uses a different prior. The practical change is in the recession forecast: the original **12.36%** estimate labeled February 2027 used a predictor row from February 2025. Selecting the February 2026 row and using the project's equity-return convention gives **8.64%**. The corrected forecast has the intended twelve-month horizon. Its outcome is unobserved in the study. [Saved coursework estimates](../../coursework_results.csv)\n\n"
         "An applied econometrics investigation with reusable Python models, explicit timing contracts, "
         "and independent numerical controls. This notebook inspects the generated empirical artifacts; "
         "it does not contain a second estimation implementation.\n\n"

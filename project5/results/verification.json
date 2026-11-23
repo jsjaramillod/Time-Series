@@ -8,26 +8,28 @@
     "scores.csv"
   ],
   "scientific_tests_passed": 9,
-  "executed_notebook_cells": 6,
+  "executed_notebook_cells": 7,
   "pdf_pages": {
-    "research_report": 5,
+    "research_report": 6,
     "executive_brief": 1
   },
   "source_checksums": {
     "scripts/audit_spread.py": "8e575f24c0e2397ddabd403d22a77f23c7d1e75b2bad3ff8e6c8bcd3db3fbded",
-    "scripts/build_report.py": "347ad516fb7a9b448cddd77fb0e3ffa7c9d6da5a9e8d11c4d78bedacc764aba5",
+    "scripts/build_report.py": "cc3b36ed0f8e8326385870b7655c4dfd985d52352c16f93165ad8c7ffa199bd3",
+    "scripts/compare_course_forecasts.py": "48fd021dda930efb83b0888418576d39bac069ac20f29184b233355a4302b701",
     "scripts/extract_calendar.py": "b6989fc26d579882dd91878a34265fd573725cdb783b0139328888a1f284822f",
     "scripts/figures.py": "87fe7e232815dda19393bd7a607e3010c0c9698707740351d0768aca8602b8e3",
-    "scripts/verify_results.py": "55b5acf1155c81eaa6bba79909e4d19d4ad7bec43f5e8531e302ae790bc4317a",
+    "scripts/verify_results.py": "304b17406ddfc133ffb9f46fa3f34ae63b08a5f0c6dc62635106d916cc5a01ea",
     "src/gdp_risk/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/gdp_risk/models.py": "6cee42ce489a593b21fa9a9763d78ae67c16381dedc00fe42ef86a4c9caf0507",
     "src/gdp_risk/study.py": "d182516e83c1757e8ecb01e26319d8e6d1e534142156f91db32d923cf8fa4e95",
     "tests/test_forecasts.py": "17e0bdfa3070e24b8ebcfece26a5c24a5fb04101ee4f21929e58922cc2163131"
   },
   "artifact_checksums": {
-    "docs/executive_summary.pdf": "c059ddcbcfae50222442d6a91c4f32e323833fc1ea3bac52e3382600748ba05c",
-    "docs/gdp_growth_at_risk.pdf": "2f33742edadc6a231895f9567164dec4965b546d7265d5d0ae679e52041a2d98",
-    "notebooks/project05_analysis.ipynb": "6168d94a125df958cc6d3660be8c523771acf355b0bca0de7cdeefac5047306d",
+    "docs/executive_summary.pdf": "697a048a729f1b8beb5834145b25a77100a73fe96331ec0d8c64127276a7a942",
+    "docs/gdp_growth_at_risk.pdf": "77da1cf29baa02ca488fd2b69a870b1b52a79aa321ee88e5e5596a6c20cf035a",
+    "notebooks/project05_analysis.ipynb": "b12eb4c24fdbd4d73f551a84b89f507a705e3210aaf1a40821121683ed43fed2",
+    "results/course_comparison.csv": "146c6190ceee129f82299c57a12efbbec1b10f89def10e902a207b2b9d2ab886",
     "results/figures/historical_risk.png": "1521e1c69ad55b28ff43b634cd5a1f1825ab58193c9c2a9512abaa438ad1c063",
     "results/figures/reference_distribution.png": "ef4e49c30f5cc2dd373eedc077c7d0a3eebe7102dbcac3accc6eb73138537239"
   }

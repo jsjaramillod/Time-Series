@@ -1,6 +1,6 @@
 {
-  "report_date": "2026-11-15",
-  "report_builder_sha256": "0ef3620aa1585c67de6e67d9572c55cc11b5182684a53b89131d7b68f15a0cde",
+  "report_date": "2026-11-23",
+  "report_builder_sha256": "cc3f7f89bac28a111d99c0ea3f950cfb423592b1428a4f907236f49fcea97ee6",
   "output": "docs/persistence_shock_propagation.pdf",
   "source_sha256": {
     "results/dynamics_summary.csv": "0329f9cd63796a053e79158c560f31b4cd1602cb930f3c99b4f075481a94c4ba",
@@ -10,5 +10,5 @@
     "results/numerical_validation.json": "3ed40fec5e4bb57fb763f3138459dea95a976aa473193700e7d2183bf185f8d9",
     "results/configurations.json": "463eda98ca9c548efbe6362303638f7046c5ce479b1d747dc902e4471d939250"
   },
-  "pdf_sha256": "80ae833e34ee47b42d8fcefb725938f7a084538b945e9034ae7a9cc276174fac"
+  "pdf_sha256": "af4f47634a7a51fe28f241594e8cc319cbd3fd3f3ce38b373d2ba69476596e12"
 }

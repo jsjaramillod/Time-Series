@@ -180,7 +180,7 @@ def build_report(root, output, report_date):
     )
     h("Executive summary")
     p(
-        "Persistence changes both how a disturbance unfolds and how much information a time average contains. Controlled autoregressive experiments show that identical accumulated long-run effects can coexist with different response speeds and variances. A separate repeated-sample experiment quantifies the loss of precision from positive serial dependence. All parameters are fixed and all observations are synthetic; the findings describe model-implied mechanisms rather than estimated macroeconomic relationships."
+        "In my doctoral assignment, a one-unit shock reached 1.20 one period later in a stable AR(2). The sum of its computed responses was 9.99999946. The portfolio reproduces the path and verifies its limiting total of 10. A separate experiment asks whether persistent observations give an overly precise impression of their mean. All observations in these experiments are synthetic."
     )
     h("Equal long-run totals do not imply equal dynamics", 2)
     p(
@@ -456,7 +456,7 @@ def build_report(root, output, report_date):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--date", default="2026-11-15", help="Report date in ISO format")
+    parser.add_argument("--date", default="2026-11-23", help="Report date in ISO format")
     arguments = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     build_report(

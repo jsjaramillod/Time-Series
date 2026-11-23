@@ -1,9 +1,9 @@
 name: Project 05 validation
 on:
   push:
-    paths: ["project5/**", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
+    paths: ["project5/**", "coursework_results.csv", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
   pull_request:
-    paths: ["project5/**", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
+    paths: ["project5/**", "coursework_results.csv", "project4/src/lag_uncertainty/reference.py", "project2/src/bayes_policy/**", ".github/workflows/project5.yml"]
 permissions:
   contents: read
 jobs:

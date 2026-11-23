@@ -1,10 +1,12 @@
 # Probabilistic GDP Forecasts and Growth at Risk
 
-After U.S. GDP fell in 2020Q2, a trend AR(4) projected a further 11.50% decline over the next four quarters. The economy grew 11.68% in log terms. That single forecast accounts for 57% of the model's total squared annual forecast error. Yet the same model beat a random walk with drift on average loss for the fifth percentile. How much a forecaster values each model depends on the outcome they need to predict.
+In my fifth doctoral assignment, the trend AR(4) put the fifth percentile of four-quarter U.S. GDP growth at **−0.218 log percentage points** from 2026Q1. The portfolio estimates **−0.342** with the same pandemic smoothing. The original chart also compared a four-quarter AR forecast with a one-quarter forecast using Treasury spreads. The revised study matches horizons and evaluates realized growth. Across **78 matched annual windows**, root mean squared error fell from **2.19** with the coursework method to **2.07** with the portfolio AR. Across the **13 post-pandemic origins**, the coursework method was closer on average, **0.58 versus 0.63**. These windows overlap and use revised GDP. [Saved coursework estimates](../coursework_results.csv) · [Matched forecasts](results/course_comparison.csv)
+
+In a separate test with observed GDP across all 86 annual origins, the benchmark is a random walk with drift. After U.S. GDP fell in 2020Q2, a trend AR(4) projected a further 11.50% decline over the next four quarters. The economy grew 11.68% in log terms. That single forecast accounts for 57% of the model's total squared annual forecast error. Yet the same model beat a random walk with drift on average loss for the fifth percentile. How much a forecaster values each model depends on the outcome they need to predict.
 
 [Research report (PDF)](docs/gdp_growth_at_risk.pdf) · [Executive brief (PDF)](docs/executive_summary.pdf) · [Executive summary](EXECUTIVE_SUMMARY.md) · [Executed notebook](notebooks/project05_analysis.ipynb)
 
-## Historical evidence
+## Separate comparison against a drift benchmark
 
 | Measure | Drift benchmark | Trend AR(4) | ARDL with Treasury spread |
 | --- | ---: | ---: | ---: |
@@ -33,6 +35,7 @@ python -m pip install -e ../project2 -e ../project3 -e ../project4 -e '.[dev]'
 pytest -q
 python scripts/verify_results.py
 gdp-risk --gdp /path/to/GDPC1.csv --spread /path/to/T10Y2Y.csv --output results
+python scripts/compare_course_forecasts.py /path/to/GDPC1.csv
 python scripts/figures.py
 python scripts/build_report.py
 ```

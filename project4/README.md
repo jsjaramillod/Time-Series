@@ -1,5 +1,7 @@
 # Project 04: Lag Uncertainty and Bayesian Model Averaging
 
+In my fourth doctoral assignment, I compared and averaged eight possible lag orders. The model using the previous two observations received **71.54%** posterior probability. The portfolio confirms that weight to two decimal places. For the eight-lag model, the mean sum of coefficients was **0.8006** in class and **0.8008** in the portfolio's integration check. The new question is how much these conclusions depend on prior beliefs: the two-lag model's weight ranges from **60.01% to 80.96%**, while model-averaged persistence stays between **0.8430 and 0.8504**. [Saved coursework estimates](../coursework_results.csv)
+
 How much of a persistence conclusion comes from choosing the lag order? This study compares AR(1)-AR(8) on a common sample and carries model uncertainty into a shared coefficient-sum distribution and finite-horizon shock responses. It combines Gibbs sampling, Chib marginal likelihoods, independent integration, and model averaging.
 
 **Implemented and executed.** The project includes an installable Python package, 24 model/prior fits, scientific tests, evidence and posterior controls, an executed notebook, a research report, and reproducibility records. Read the [executive summary](EXECUTIVE_SUMMARY.md), [English research report (PDF)](docs/lag_uncertainty_model_averaging.pdf), or [methods](docs/methods.md).

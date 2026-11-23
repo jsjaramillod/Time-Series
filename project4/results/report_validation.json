@@ -1,5 +1,5 @@
 {
-  "report_date": "2026-11-17",
+  "report_date": "2026-11-23",
   "output": "docs/lag_uncertainty_model_averaging.pdf",
   "source_sha256": {
     "results/study_summary.json": "6fbe8dc3d48ee3c1c250b511888288f372b7ed2df89d841b90fe2df306291419",
@@ -22,8 +22,8 @@
     "results/figures/variance_equation.png": "c740734adb06cf5e3f917efe1e5dbabe7cfa2fd18226e6835a6c51c486960afa"
   },
   "builder_sha256": {
-    "scripts/build_research_report.py": "89287ee1d9e7add52981694b4c2d7bbd9137c2352752d5173d93f5e959a8f704",
+    "scripts/build_research_report.py": "c9b1aba358d6394040119c2c265a3e3ba9fd30bdb5198e850f9eb15bf1ddb216",
     "scripts/report_style.py": "a3b68a29bcf7d1a21f4d5ec458c8ea811b8f3e57fb8268782d0d56be17fec0fc"
   },
-  "pdf_sha256": "dd58561a3804fa49da1461c5e9c82700660b8a82ed9c8574e0f0c4eb6063e031"
+  "pdf_sha256": "d6524988eca18ed6ce9d6393c3bd290dbbb50353fd7431a593b78507f7270bf4"
 }

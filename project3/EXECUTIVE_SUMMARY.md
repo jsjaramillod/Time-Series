@@ -1,5 +1,7 @@
 # Executive summary
 
+In my third doctoral assignment, a one-unit shock in a two-lag model generated a response of **1.20** one period later. Summing the computed responses gave **9.99999946**. The portfolio reproduces that path and verifies its theoretical cumulative effect of **10**. A second experiment asks how much confidence to place in an average of persistent observations. Across 10,000 simulations with known parameters, an intended 95% interval covered the true mean **35.27%** of the time under independence and **95.00%** when it used the serial covariance.
+
 ## Persistence and shock propagation
 
 The analysis quantifies how dynamic specifications change the duration, accumulated effect, and variability of shocks. It uses fixed parameters and synthetic Gaussian innovations. The conclusions describe controlled mechanisms rather than estimated macroeconomic relationships. The [research report](docs/persistence_shock_propagation.pdf) develops the findings, figures, and supporting calculations.

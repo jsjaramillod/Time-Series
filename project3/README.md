@@ -1,5 +1,7 @@
 # Project 03: Persistence and Shock Propagation in Time Series
 
+In my third doctoral assignment, a one-unit shock in a two-lag model generated a response of **1.20** one period later. Summing the computed responses gave **9.99999946**. The portfolio reproduces that path and verifies its theoretical cumulative effect of **10**. A second experiment asks how much confidence to place in an average of persistent observations. Across 10,000 simulations with known parameters, an intended 95% interval covered the true mean **35.27%** of the time under independence and **95.00%** when it used the serial covariance. [Saved coursework estimates](../coursework_results.csv)
+
 How much of a shock remains after twenty periods, and how much information does a persistent series contain? This project answers those questions with controlled autoregressive and moving-average experiments. Parameters are fixed inputs; observations are synthetic. It separates model stability, shock transmission, and the precision of time averages.
 
 **Implemented and executed:** an installable Python package, command-line experiment pipeline, scientific tests, executed notebook, numerical controls, figures, and an English research report. The [executive summary](EXECUTIVE_SUMMARY.md) and [research report (PDF)](docs/persistence_shock_propagation.pdf) present the economic interpretation. The [methods](docs/methods.md) give equations, conventions, and primary references.

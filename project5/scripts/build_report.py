@@ -14,7 +14,7 @@ from report_style import ResearchReport  # noqa: E402
 
 RES = ROOT / "results"
 TITLE = "U.S. GDP Growth at Risk"
-SUB = "Forecasting the downside across 86 four-quarter outcomes"
+SUB = "Testing the downside forecast for U.S. growth"
 
 
 def rows(name):
@@ -68,35 +68,68 @@ def build():
     share = (float(shock["actual"]) - float(shock["mean"])) ** 2 / (
         float(ar["rmse"]) ** 2 * int(ar["n"])
     )
+    comparison = [row for row in rows("course_comparison") if row["actual"]]
+    samples = [
+        ("Through 2019Q4", [r for r in comparison if r["training"] == "observed"]),
+        ("From 2022Q1", [r for r in comparison if r["training"] == "interpolated"]),
+        ("All eligible origins", comparison),
+    ]
+
+    def losses(records, method):
+        errors = [float(r["actual"]) - float(r[f"{method}_mean"]) for r in records]
+        gaps = [float(r["actual"]) - float(r[f"{method}_p05"]) for r in records]
+        return (
+            (sum(e * e for e in errors) / len(records)) ** 0.5,
+            sum(max(0.05 * g, -0.95 * g) for g in gaps) / len(records),
+        )
+
+    matched = []
+    for label, sample in samples:
+        course_rmse, course_loss = losses(sample, "course")
+        project_rmse, project_loss = losses(sample, "project")
+        matched.append(
+            [
+                label,
+                len(sample),
+                f"{course_rmse:.3f}",
+                f"{project_rmse:.3f}",
+                f"{course_loss:.3f}",
+                f"{project_loss:.3f}",
+            ]
+        )
     sections = [
         (
+            "Did the portfolio improve the annual forecast?",
+            f"Across {matched[2][1]} matched annual origins, root mean squared error fell from {matched[2][2]} to {matched[2][3]} log percentage points, a 5.6% reduction. Fifth-percentile loss fell from {matched[2][4]} to {matched[2][5]}. The coursework method won on both measures over the {matched[1][1]} post-pandemic origins. Its mean-forecast error was {matched[1][2]} against {matched[1][3]}. The windows overlap and use revised GDP.",
+        ),
+        (
             "The cost of missing a rebound",
-            f"The random walk with drift delivered the more accurate annual growth forecast on average. Its root mean squared error was {fmt(drift, 'rmse')} log percentage points, against {fmt(ar, 'rmse')} for the trend autoregression. One forecast accounts for {share:.0%} of the autoregression's total squared error. After the second quarter of 2020 it projected {fmt(shock, 'mean')}% cumulative growth over the following year. Realized growth was +{fmt(shock, 'actual')}%.",
+            f"In a separate comparison over all {drift['n']} annual origins using observed GDP, the random walk with drift delivered the more accurate mean forecast. Its root mean squared error was {fmt(drift, 'rmse')} log percentage points, against {fmt(ar, 'rmse')} for the trend autoregression. One forecast accounts for {share:.0%} of the autoregression's total squared error. After the second quarter of 2020 it projected {fmt(shock, 'mean')}% cumulative growth over the following year. Realized growth was +{fmt(shock, 'actual')}%.",
         ),
         (
             "A different ranking for downside risk",
             f"The autoregression produced a lower average fifth-percentile loss than the drift benchmark ({fmt(ar, 'loss05', 3)} versus {fmt(drift, 'loss05', 3)}). Its average central 90% interval was wider ({fmt(ar, 'width')} versus {fmt(drift, 'width')} points). Growth fell below its downside threshold in {ar['breaches']} of {ar['n']} forecasts ({percent(ar, 'breach_rate')}), above the nominal 5%. Five of those misses ended between 2008Q3 and 2009Q3 and three ended in 2020. Adjacent annual outcomes share three quarters.",
         ),
         (
-            "Limited incremental information from the yield curve",
-            f"Across {one_ar['n']} one-quarter outcomes, adding four lags of the 10-year minus 2-year Treasury spread changed fifth-percentile loss from {fmt(one_ar, 'loss05', 4)} to {fmt(spread, 'loss05', 4)}. Mean-forecast error rose from {fmt(one_ar, 'rmse')} to {fmt(spread, 'rmse')} points. The small change in the tail score offers little basis for choosing the larger model in this sample.",
+            "What did the Treasury spread add at a common horizon?",
+            f"Over {one_ar['n']} one-quarter targets, adding the spread nudged fifth-percentile loss from {fmt(one_ar, 'loss05', 4)} to {fmt(spread, 'loss05', 4)}. Mean-forecast error increased from {fmt(one_ar, 'rmse', 3)} to {fmt(spread, 'rmse', 3)} points.",
         ),
         (
             "Downside risk at the 2026Q1 forecast origin",
             f"Using observed GDP through 2026Q1, the autoregression put mean four-quarter growth at {fmt(a, 'mean')}%, the fifth percentile at {fmt(a, 'p05')}%, and the probability of contraction at {percent(a, 'p_negative')}. Smoothing eight pandemic quarters in the training sample moved the fifth percentile to {fmt(sm, 'p05')}% and the contraction probability to {percent(sm, 'p_negative')}. These estimates describe a fixed historical exercise using revised GDP levels.",
         ),
     ]
-    intro = "How much weight should an economist put on the downside of a GDP forecast? An expanding-window comparison of U.S. quarterly data from 1984Q1 through 2026Q1 evaluates forecasts of both average growth and the point below which a model places 5% of outcomes. The choice of model depends on which forecast is scored."
+    intro = "In my doctoral assignment, the trend AR(4) put the fifth percentile of annual GDP growth from 2026Q1 at -0.218 log percentage points. The portfolio estimate is -0.342 using the same pandemic smoothing. The original chart paired an annual GDP forecast with a one-quarter spread forecast. Matching horizons lets us test both average growth and the downside against realized outcomes."
     (ROOT / "EXECUTIVE_SUMMARY.md").write_text(
         "# U.S. GDP Growth at Risk\n\n"
         + intro
         + "\n\n"
         + "\n\n".join("## " + h + "\n\n" + p for h, p in sections)
-        + "\n\n[Research report](docs/gdp_growth_at_risk.pdf) · [Forecast scores](results/scores.csv) · [Forecast records](results/forecasts.csv)\n"
+        + "\n\n[Research report](docs/gdp_growth_at_risk.pdf) · [Matched coursework and portfolio forecasts](results/course_comparison.csv) · [Saved coursework estimates](../coursework_results.csv) · [Forecast scores](results/scores.csv)\n"
     )
 
     def first():
-        page = ResearchReport(TITLE, SUB, date(2026, 11, 18), RES / "figures")
+        page = ResearchReport(TITLE, SUB, date(2026, 11, 23), RES / "figures")
         page.h("Executive summary")
         page.p(intro)
         for h, p in sections:
@@ -110,6 +143,39 @@ def build():
         "Executive summary of the GDP forecast evaluation",
     )
     r = first()
+    r.page()
+    r.h("How did the coursework forecast hold up on matched dates?")
+    r.p(
+        "The saved coursework result is one forecast. At 2026Q1 the original model placed a 5% probability on annual growth below -0.218 log percentage points by 2027Q1. The reconstruction gives -0.2175. Applying the portfolio model to the same smoothed training series gives -0.342. Keeping the observed pandemic quarters moves it to -1.150. The target quarter falls beyond the supplied data, so a realized error cannot be calculated for these estimates."
+    )
+    r.h("An annual forecast from each eligible origin", 2)
+    r.p(
+        "I reconstructed the class regression and its predictive simulation at each eligible origin. Both models received the same history and predicted the same four-quarter growth outcome. For the 65 origins through 2019Q4, the data are observed. From 2022Q1, both models smooth the same eight pandemic observations. A forecaster in those eight intervening quarters could not yet use the 2022Q1 endpoint required for interpolation."
+    )
+    r.table(
+        "Matched annual forecasts. The last two columns score the predicted fifth percentile. Lower is better in all four score columns.",
+        [
+            "Forecast origins",
+            "N",
+            "Class RMSE",
+            "Portfolio RMSE",
+            "Class tail loss",
+            "Portfolio tail loss",
+        ],
+        matched,
+        [1.8, 0.47, 0.95, 1, 1, 1],
+        True,
+    )
+    r.p(
+        "Most eligible forecasts were issued before the pandemic. They drive the overall improvement. The 13 later origins reverse the ranking for both average growth and downside loss. Consecutive annual forecasts share three quarters of realized growth, so the count overstates the number of independent economic episodes."
+    )
+    r.h("Why the other scorecard has 86 outcomes", 2)
+    r.p(
+        "The separate drift comparison keeps observed pandemic GDP throughout and can therefore score all 86 annual origins, including the eight omitted above. It answers a different question: would a forecaster using observed GDP have done better with a trend autoregression or with a simple random walk with drift?"
+    )
+    r.reference(
+        "Replication: results/course_comparison.csv pairs the forecasts by origin and target. scripts/compare_course_forecasts.py reconstructs the coursework side from the frozen GDP snapshot."
+    )
     r.page()
     r.h("1. What could a forecaster use at the time?")
     r.p(

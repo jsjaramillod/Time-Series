@@ -8,7 +8,7 @@ The central questions connect learning and prediction: how beliefs change with n
 
 | Project | Economic or statistical question | Material and implementation status |
 | --- | --- | --- |
-| [01 — Bayesian Learning and Posterior Prediction for Discrete Data](project_01_bayesian_discrete_models) | How do prior beliefs and observations shape posterior predictions? | Existing [Python notebook](project1/project_01_bayesian_discrete_models.ipynb), PGA scoring data, figures, and project description. |
+| [01 — Bayesian Learning and Posterior Prediction for Discrete Data](project1/README.md) | How do prior beliefs and observations shape posterior predictions? | Existing [Python notebook](project1/project_01_bayesian_discrete_models.ipynb), PGA scoring data, figures, and project description. |
 | [02 — Bayesian Monetary Policy and Recession Risk](project2/README.md) | Do policy responses differ across economic conditions, and which financial signals anticipate recessions? | Implemented Python package, scientific tests, empirical policy analysis, and pseudo-real-time recession forecasts; documented model and data limitations. |
 | [03 — Persistence and Shock Propagation in Time Series](project3/README.md) | How do autoregressive dynamics determine stability, persistence, and the response to a controlled shock? | Implemented Python package, controlled simulations, scientific controls, executed notebook, and research report. |
 | [04 — Lag Uncertainty and Bayesian Model Averaging](project4/README.md) | How much history does a model need, and how does lag uncertainty affect inference about persistence? | Implemented conditional AR comparison, Gibbs sampling, independent evidence controls, model-averaged posteriors, and research report. |
@@ -17,17 +17,21 @@ The central questions connect learning and prediction: how beliefs change with n
 | [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Research design; implementation pending. |
 | [08 — Common Factors, Forecast Evaluation, and Structural Interpretation](project8/README.md) | Can common signals aid prediction, and what long-run assumptions support the interpretation of technology shocks? | Research design; implementation pending. |
 
-The [Project 02 executive summary](project2/EXECUTIVE_SUMMARY.md) and [research report (PDF)](project2/docs/monetary_policy_recession_risk.pdf) present its principal findings and limitations. Project 02 includes an executable Python package, tested Bayesian samplers, independent model-evidence controls, an analysis notebook, and empirically generated reports. Its recession evaluation uses revised data and explicit label-availability assumptions. Project 03 adds controlled persistence and shock-transmission experiments, exact mean-precision calculations, and an [English research report](project3/docs/persistence_shock_propagation.pdf). Project 04 carries lag-order uncertainty into coefficient-sum and response posteriors; its [executive summary](project4/EXECUTIVE_SUMMARY.md) and [research report](project4/docs/lag_uncertainty_model_averaging.pdf) document model preference, prior sensitivity, and numerical controls. Project 05 evaluates GDP forecasts across 89 quarterly and 86 annual outcomes. Read the [growth-at-risk report](project5/docs/gdp_growth_at_risk.pdf). Project 06 compares nested Bayesian systems on 216 monthly payroll releases. Read the [payroll report](project6/docs/payroll_forecasts.pdf) and [executive brief](project6/docs/executive_summary.pdf). Projects 07–08 contain research designs.
+The first five studies start with results from my doctoral time-series coursework. The PGA study reproduces the predictive mean and checks its upper tail. The policy study reproduces the original model odds and repairs the recession forecast dates. The shock experiment tests interval coverage, and the lag-order study tests sensitivity to prior beliefs. For GDP, a comparison of 78 matched annual forecasts finds a smaller overall error for the portfolio model and a smaller error for the coursework method over 13 post-pandemic origins. Project 06 starts from the original payroll estimate and tests its pandemic smoothing rule on matched dates.
+
+[Saved coursework estimates](coursework_results.csv) are transcribed from the author's archived notebook. Each row identifies its output cell. The source notebook's SHA-256 is `8cb38041e00a5569e3167f3bb8cf90567daf5892520f434a1124f3c104a1f242`. The [GDP comparison](project5/results/course_comparison.csv) contains newly reconstructed forecasts and their outcomes.
 
 ## Repository contents
 
-The following paths exist in the repository. `project_01_bayesian_discrete_models` is a text file containing the Project 01 description.
+The following paths exist in the repository. `project_01_bayesian_discrete_models` is the legacy entry point for the Project 01 overview.
 
 ```text
 Time-Series/
 ├── README.md
+├── coursework_results.csv
 ├── project_01_bayesian_discrete_models
 ├── project1/
+│   ├── README.md
 │   ├── project_01_bayesian_discrete_models.ipynb
 │   ├── data/
 │   │   └── pga_scores.xlsx

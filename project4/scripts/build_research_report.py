@@ -80,7 +80,7 @@ def build_report(root, report_date):
 
     h("Executive summary")
     p(
-        "Choosing a lag order is part of an inference problem, not merely a preprocessing step. For the supplied series, a parsimonious AR(2) has the largest posterior model probability, but several alternatives retain meaningful weight. Model averaging changes both the center and dispersion of the coefficient-sum posterior and the timing of finite shock responses. The findings are conditional on the declared priors and eight-model set; the data-generating process remains unverified."
+        "My doctoral assignment averaged eight lag orders. The two-lag model received 71.54% posterior probability, a result the portfolio reproduces. The eight-lag coefficient sum averaged 0.8006 in class and 0.8008 under numerical integration. How strongly do the priors affect that conclusion? Across the tested specifications, the two-lag weight ranges from 60.01% to 80.96%, while model-averaged persistence stays between 0.8430 and 0.8504."
     )
     h("Model preference changes with prior concentration", 2)
     p(
@@ -452,7 +452,7 @@ def build_report(root, report_date):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--date", default="2026-11-17")
+    parser.add_argument("--date", default="2026-11-23")
     args = parser.parse_args()
     build_report(Path(__file__).resolve().parents[1], date.fromisoformat(args.date))
 

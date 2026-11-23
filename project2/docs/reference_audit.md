@@ -20,3 +20,9 @@ This document records the statistical and data-timing choices behind the reporte
 | Posterior dispersion | Compute standard deviations directly from retained draws. | Negative standard deviations are invalid; no unexplained historical value is carried forward. |
 
 Input manifests record workbook SHA-256 checksums, observed coverage, and effective samples. These checksums establish byte identity for reproduction; they do not establish original download dates, historical data vintages, or redistribution rights. Those aspects remain unverified. See [methods](methods.md) for equations and primary methodological references.
+
+## Reconstructing the original forecast dates
+
+The coursework workbook stored dates as numeric YYYYMM. The original historical fit interpreted those values as timestamps near 1970, admitting all 779 labeled pairs even at the January 2007 origin. It also selected the last row with a known forward outcome for its endpoint prediction. That row held February 2025 predictors. The portfolio separates feature availability from label availability and uses a simple three-month equity return in place of the coursework log return.
+
+On the twelve realized 2008 targets, the saved probabilities had Brier loss 0.767 and negative log loss 2.086. The dated portfolio forecasts scored 0.756 and 2.154. A separate historical-frequency benchmark scored 0.777 and 2.134. Lower is better on each metric. All twelve outcomes were recessions and the coursework fit had access to future information. These scores describe a single episode. [Saved probabilities](../../coursework_results.csv) · [Dated forecasts](../results/recession/recession_forecasts.csv)

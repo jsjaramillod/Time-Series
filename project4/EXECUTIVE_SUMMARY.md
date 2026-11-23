@@ -1,5 +1,7 @@
 # Executive summary
 
+In my fourth doctoral assignment, I compared and averaged eight possible lag orders. The model using the previous two observations received **71.54%** posterior probability. The portfolio confirms that weight to two decimal places. For the eight-lag model, the mean sum of coefficients was **0.8006** in class and **0.8008** in the portfolio's integration check. The new question is how much these conclusions depend on prior beliefs: the two-lag model's weight ranges from **60.01% to 80.96%**, while model-averaged persistence stays between **0.8430 and 0.8504**.
+
 ## Lag uncertainty and model-averaged persistence
 
 The study asks whether conclusions about persistence depend on selecting an autoregressive lag order. It compares AR(1)-AR(8), carries their posterior weights into a shared coefficient-sum distribution, and evaluates finite-horizon shock responses. The supplied series has 200 ordered observations and an unverified generating process. All models condition on the initial eight observations and explain the same 192 targets. The [research report](docs/lag_uncertainty_model_averaging.pdf) develops the analysis and supporting estimates.

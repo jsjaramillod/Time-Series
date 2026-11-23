@@ -1,0 +1,22 @@
+project,quantity,target,saved_value,unit,source_cell_id
+1,PGA predictive mean,,71.224522,strokes,4a2a75e9-b2e6-4d1f-8af7-48d68bff3eda
+1,PGA probability of more than 75,,0.301108,probability,4a2a75e9-b2e6-4d1f-8af7-48d68bff3eda
+2,Symmetric rule probability (prior variance 5),,0.9506250681065349,probability,84a6b5a7-3522-4ce5-84bc-abfa340bfbff
+2,Recession probability (original target label),2027-02,0.12363542793894484,probability,cf20f9c6-dda2-418b-b176-3768b8c80d36
+2,Recession probability (original cutoff procedure),2008-01,0.12349069518072911,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-02,0.12418566257472283,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-03,0.12420907500711151,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-04,0.12413058636259958,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-05,0.12430880547854645,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-06,0.12449261986555611,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-07,0.12392361943508659,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-08,0.1247369267384384,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-09,0.12448361181218578,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-10,0.12484590438670959,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-11,0.12392020672736703,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+2,Recession probability (original cutoff procedure),2008-12,0.12350953368868456,probability,b5213881-e949-42d9-9afa-0449af53c0fd
+3,AR(2) unit shock response at horizon one,,1.200000,response units,5352e47a-f693-4800-b648-375d25742f90
+3,AR(2) truncated cumulative response,,9.999999463834921,response units,e707f95a-5df5-4482-9cc4-f6ae09a9d61c
+4,Probability of AR(2),,0.715371,probability,5a5b251f-73f8-4ecf-96b2-daed8554e29c
+4,AR(8) posterior mean of coefficient sum,,0.8006168525296706,coefficient sum,79e5ada2-c043-47ec-b7f3-21e8f274422d
+5,AR(4) fifth percentile of four-quarter growth,2027Q1,-0.21802973844223741,log percentage points,2a1166d9-fac6-4111-8e36-8dd7483b8610

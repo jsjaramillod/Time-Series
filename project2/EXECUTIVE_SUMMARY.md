@@ -1,5 +1,9 @@
 # Executive summary
 
+In my second doctoral assignment, the simpler Federal Reserve policy rule received **95.06%** posterior probability. Re-estimation gives **95.06%** with the same coefficient prior. The **96.44%** result uses a different prior. The practical change is in the recession forecast: the original **12.36%** estimate labeled February 2027 used a predictor row from February 2025. Selecting the February 2026 row and using the project's equity-return convention gives **8.64%**. The corrected forecast has the intended twelve-month horizon. Its outcome is unobserved in the study.
+
+In the twelve 2008 targets, the mean squared probability error (Brier loss) fell from 0.767 in class to 0.756, while negative log loss rose from 2.086 to 2.154. All twelve months were in recession, and the original fit used labels unavailable at those forecast dates. [Date and score audit](docs/reference_audit.md)
+
 Read the [full research report (PDF)](docs/monetary_policy_recession_risk.pdf) for the economic analysis, figures, and supporting estimates.
 
 ## Purpose and approach
