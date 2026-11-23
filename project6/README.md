@@ -1,6 +1,6 @@
 # Macroeconomic Information and U.S. Payroll Forecasts
 
-Does an economist gain more from watching production and prices, or from also watching financial markets? Across 216 monthly payroll releases from January 2007 to December 2024, adding industrial production and CPI to employment history reduced root mean squared error by about 25%. Adding equity prices and the Treasury spread changed that error by less than 1%. The four releases from March through June 2020 fell outside every model's nominal 90% interval.
+My original April 2026 payroll forecast from doctoral coursework was **+61,140 jobs**. The first BLS estimate was **+115,000**, a miss of 53,860. That forecast used five monthly indicators and smoothed the pandemic years. Which indicators improve the job count across many releases? When does retaining an extreme episode help the next forecast? The study compares three information sets on 216 first announcements and separately tests the original smoothing choice on matched dates.
 
 [Executive brief (PDF)](docs/executive_summary.pdf) · [Research report (PDF)](docs/payroll_forecasts.pdf) · [Executive summary](EXECUTIVE_SUMMARY.md) · [Executed notebook](notebooks/project06_analysis.ipynb)
 
@@ -14,7 +14,9 @@ Does an economist gain more from watching production and prices, or from also wa
 
 The evaluation covers complete calendar years from just before the 2008–09 downturn through the last full year before the 2025 CPI interruption. Rows use the same 216 first announcements and the primary prior. Thirty-five announcements reported losses. Lead time from issue to release ranged from 8 to 35 calendar days. Regressors use a frozen, revised workbook, so the calendar reconstruction is pseudo-real-time. The report also scores revised targets, tests tighter shrinkage, and separates the financial crisis from the first pandemic releases.
 
-In the April 2026 retrospective illustration, the five-variable model assigned a 56.5% probability to a payroll decline. Replacing 26 pandemic-era months with a smooth path lowered it to 41.4%. BLS initially reported a gain of 115,000 jobs. This example measures sensitivity to the training history.
+In April the two five-variable refits predicted **+46,436 jobs** with smoothing and **−141,062** with observed history. Their absolute errors were **68,564** and **256,062**. The employment-only model with observed history was closer at **+83,826** (error **31,174**). The original calculation and the refits use different March payroll snapshots. [Archived estimate and provenance](data/README.md#original-april-comparison)
+
+A matched comparison applies the same five-variable implementation to all 34 eligible targets from March 2022 through December 2024. Smoothing reduced mean absolute error from **226,414 to 145,702 jobs**. The corresponding 90% intervals covered 31 of 34 first releases with smoothing and 34 of 34 with observed history. Every first release in this window was a gain. [Matched forecast records](results/matched_histories.csv)
 
 ## Reproduction
 
@@ -30,6 +32,7 @@ To refit all 1,308 primary and sensitivity specifications and repeat the 648 pri
 
 ```sh
 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 OMP_NUM_THREADS=1 payroll-risk /path/to/data_aggregated.xlsx --workers 4
+python scripts/compare_histories.py /path/to/data_aggregated.xlsx
 python scripts/figures.py
 python scripts/build_report.py
 ```

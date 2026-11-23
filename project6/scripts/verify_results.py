@@ -49,6 +49,30 @@ def verify():
         rtol=1e-8,
     )
     assert (ref.first_release == 115).all()
+    original = pd.read_csv(data / "original_april_forecast.csv").iloc[0]
+    assert original.target == ref.target.iloc[0] and original.training == "interpolated"
+    assert np.isclose(ref.first_release.iloc[0] - original["mean"], 53.86)
+    matched = pd.read_csv(res / "matched_histories.csv")
+    base = f.query("model == 'Full' and intensity == 0.5 and origin >= '2022-02'")
+    actual = matched.query("training == 'observed'")
+    assert len(matched) == 68 and len(base) == 34
+    assert not matched.duplicated(["training", "origin"]).any()
+    columns = ["origin", "target", "issue_date", "first_release"]
+    pd.testing.assert_frame_equal(
+        base[columns].reset_index(drop=True), actual[columns].reset_index(drop=True)
+    )
+    np.testing.assert_allclose(
+        base[["mean", "p05", "p95", "p_loss"]], actual[["mean", "p05", "p95", "p_loss"]]
+    )
+    adjusted = matched.query("training == 'interpolated'")
+    pd.testing.assert_frame_equal(
+        adjusted[columns].reset_index(drop=True), actual[columns].reset_index(drop=True)
+    )
+    assert adjusted.first_release.between(adjusted.p05, adjusted.p95).sum() == 31
+    assert (adjusted.first_release > 0).all()
+    assert actual.first_release.between(actual.p05, actual.p95).all()
+    assert round((adjusted["mean"] - adjusted.first_release).abs().mean() * 1000) == 145702
+    assert round((actual["mean"] - actual.first_release).abs().mean() * 1000) == 226414
     manifest = json.loads((res / "checksums.json").read_text())
     for name, digest in manifest.items():
         assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name

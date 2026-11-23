@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT.parent / "project4/scripts"))
 from report_style import ResearchReport  # noqa: E402
 
 TITLE = "Forecasting U.S. Payrolls"
-SUBTITLE = "What production, prices and financial markets add to employment history"
+SUBTITLE = "From one April forecast to 216 monthly payroll releases"
 NAMES = {"AR": "Employment only", "Macro": "Three variables", "Full": "Five variables"}
 RES = ROOT / "results"
 
@@ -84,11 +84,28 @@ def build():
 
     gain = 1 - float(macro["rmse"]) / float(ar["rmse"])
     financial = 1 - float(full["rmse"]) / float(macro["rmse"])
+    with (ROOT / "data/original_april_forecast.csv").open() as stream:
+        original = next(csv.DictReader(stream))
+    actual = float(obs["first_release"])
+    original_jobs = float(original["mean"]) * 1000
+    original_error = abs(original_jobs - 1000 * actual)
+    sm_error = abs(float(sm["mean"]) - actual) * 1000
+    obs_error = abs(float(obs["mean"]) - actual) * 1000
+    paired = rows("matched_histories")
+    matched_mae = {
+        k: mean(
+            abs(float(row["mean"]) - float(row["first_release"]))
+            for row in select(paired, training=k)
+        )
+        * 1000
+        for k in ["interpolated", "observed"]
+    }
     intro = (
-        "Would a labor-market analyst improve the next payroll forecast by adding industrial "
-        "production, consumer prices, equity prices and the Treasury yield curve? Three Bayesian models "
-        "face the same 216 monthly releases from January 2007 through December 2024. Each predicts "
-        "both the job count and the probability of a decline."
+        f"In my doctoral time-series course, my five-variable model put the April 2026 gain at "
+        f"{original_jobs:,.0f} jobs. The first announcement was +115,000, an absolute error of "
+        f"{original_error:,.0f}. Which indicators earn their place across many releases, and how much "
+        "does the treatment of the pandemic matter? The historical comparison tests three information "
+        "sets on the same 216 first announcements from January 2007 to December 2024."
     )
     sections = [
         (
@@ -107,17 +124,18 @@ def build():
             f"spanned {width(after) / 1000:.2f} million jobs in 2022–24, compared with {width(before) / 1000:.2f} million in 2015–19.",
         ),
         (
-            "How much history changes a risk judgment",
-            f"With data through March 2026, the five-variable model put the chance of an April payroll decline "
-            f"at {pct(obs, 'p_loss')}. Smoothing 26 pandemic-era months in the same history lowered it to "
-            f"{pct(sm, 'p_loss')}. The first announcement was a gain of 115,000 jobs. The risk estimate depended "
-            "materially on the treatment of an exceptional episode.",
+            "The original pandemic adjustment held up after the shock",
+            f"The five-variable refit with the same smoothing rule missed April by {sm_error:,.0f} jobs. "
+            f"Keeping the pandemic observations raised the miss to {obs_error:,.0f}. "
+            f"Across 34 earlier first releases from March 2022 to December 2024, smoothing "
+            f"lowered the model’s mean absolute error from {matched_mae['observed'] / 1000:,.0f},000 to "
+            f"{matched_mae['interpolated'] / 1000:,.0f},000 jobs. All 34 announcements were gains.",
         ),
     ]
     limit = (
         "The models use historical release dates and a common cutoff, but their inputs contain subsequent "
         "revisions. The backtest measures performance under that reconstruction. The fixed April 2026 "
-        "illustration is separate from the 216 scored months."
+        "comparison uses saved estimates from two different input snapshots. The 34 paired forecasts use the same revised inputs and model settings."
     )
     brief = new_report("Executive brief  |  Monthly nonfarm employment")
     brief.p(intro)
@@ -244,7 +262,7 @@ def build():
     )
 
     r.page()
-    r.h("April 2026 through two versions of history")
+    r.h("April 2026, from the original forecast to the refits")
     r.p(
         "The fixed exercise uses 771 observations through March 2026. March payrolls were released on April 3, "
         "CPI on April 10 and industrial production on April 16. May 8 brought the first April payroll figure, "
@@ -256,17 +274,28 @@ def build():
             "Training history",
             "Information set",
             "Mean",
-            "Median",
+            "Abs. error",
             "5th pct.",
             "95th pct.",
             "P(loss)",
         ],
         [
             [
+                "Original, smoothed",
+                "Five variables",
+                signed(original, "mean"),
+                f"{original_error / 1000:,.0f}",
+                signed(original, "p05"),
+                signed(original, "p95"),
+                "n/a",
+            ]
+        ]
+        + [
+            [
                 a["training"].capitalize(),
                 NAMES[a["model"]],
                 signed(a, "mean"),
-                signed(a, "median"),
+                f"{abs(float(a['mean']) - actual):,.0f}",
                 signed(a, "p05"),
                 signed(a, "p95"),
                 pct(a, "p_loss"),
@@ -275,6 +304,12 @@ def build():
         ],
         [1.24, 1.48, 0.67, 0.72, 0.78, 0.78, 0.81],
         True,
+    )
+    r.p(
+        "The original five-variable estimate was closer than either five-variable refit. The employment-only "
+        "model with observed history was closer still (+83,826, error 31,174). "
+        "March payrolls in the original calculation were 158,621,000, compared with 158,637,000 in the "
+        "frozen panel. The archived result has different inputs and simulation draws."
     )
     r.figure(
         "april_reference.png",
@@ -300,8 +335,8 @@ def build():
     )
     r.p(
         "The alternative history replaces the raw monthly levels and rates from December 2019 through "
-        "January 2022 with a time-linear path between November 2019 and February 2022. It is a retrospective "
-        "sensitivity experiment. Historical scoring retains every observed pandemic movement."
+        "January 2022 with a time-linear path between November 2019 and February 2022. The primary "
+        "216-month comparison uses observed history. A paired check starts once both smoothing endpoints are available."
     )
 
     r.page()
@@ -345,6 +380,14 @@ def build():
         ],
         [1.51, 1.08, 0.84, 0.84, 0.79, 0.95],
         True,
+    )
+    r.h("What the original smoothing rule changes on matched dates", 2)
+    r.p(
+        "March 2022 is the first target for which the February 2022 interpolation endpoint was available. "
+        "Across all 34 eligible targets through December 2024, the same five-variable model and workbook "
+        f"gave mean absolute errors of {matched_mae['interpolated']:,.0f} jobs with smoothing and "
+        f"{matched_mae['observed']:,.0f} with observed history. The respective 90% intervals covered "
+        "31 and 34 of the 34 announcements. All were positive, limiting what the comparison says about future downturns."
     )
     r.h("How small is the financial increment?", 2)
     repeat = select(rows("replay_scores"), episode="All", vintage="first_release")
