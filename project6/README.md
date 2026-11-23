@@ -1,57 +1,46 @@
-# Project 06: Macroeconomic Information and Payroll Forecasts
+# Macroeconomic Information and U.S. Payroll Forecasts
 
-Does incorporating macroeconomic and financial information improve employment forecasts, and when does that information justify a more complex model? This project will compare progressively richer information sets, expressing forecasts as job gains or losses, predictive intervals, and the probability of an employment decline.
+Does an economist gain more from watching production and prices, or from also watching financial markets? Across 216 monthly payroll releases from January 2007 to December 2024, adding industrial production and CPI to employment history reduced root mean squared error by about 25%. Adding equity prices and the Treasury spread changed that error by less than 1%. The four releases from March through June 2020 fell outside every model's nominal 90% interval.
 
-**Status: research-design draft.** Models, prepared datasets, and reproduced results are not implemented here. The three-model historical comparison is a proposed extension of the fixed reference analysis.
+[Executive brief (PDF)](docs/executive_summary.pdf) · [Research report (PDF)](docs/payroll_forecasts.pdf) · [Executive summary](EXECUTIVE_SUMMARY.md) · [Executed notebook](notebooks/project06_analysis.ipynb)
 
-## Comparing information sets
+## Reading the estimates
 
-The initial comparison will forecast one month ahead using:
+| Information set | RMSE, thousands of jobs | Mean absolute error, thousands | 90% coverage | Loss-probability Brier score |
+| --- | ---: | ---: | ---: | ---: |
+| Employment only | 2,187 | 467 | 95.4% | 0.147 |
+| Employment, production, CPI | 1,647 | 380 | 96.3% | 0.150 |
+| Macro plus equity and term spread | 1,645 | 372 | 96.3% | 0.141 |
 
-| Model | Information |
-| --- | --- |
-| Univariate autoregression | Employment history. |
-| Small BVAR | Employment, industrial production, and prices. |
-| Full BVAR | The small system plus equity prices and a Treasury yield spread. |
+The evaluation covers complete calendar years from just before the 2008–09 downturn through the last full year before the 2025 CPI interruption. Rows use the same 216 first announcements and the primary prior. Thirty-five announcements reported losses. Lead time from issue to release ranged from 8 to 35 calendar days. Regressors use a frozen, revised workbook, so the calendar reconstruction is pseudo-real-time. The report also scores revised targets, tests tighter shrinkage, and separates the financial crisis from the first pandemic releases.
 
-For a controlled starting design, propose twelve monthly lags and an intercept in every model. The full BVAR preserves the reference five-variable, twelve-lag specification. Lag choices, variable scaling, and comparable prior rules across model dimensions will be documented before evaluation.
+In the April 2026 retrospective illustration, the five-variable model assigned a 56.5% probability to a payroll decline. Replacing 26 pandemic-era months with a smooth path lowered it to 41.4%. BLS initially reported a gain of 115,000 jobs. This example measures sensitivity to the training history.
 
-Inputs are `PAYEMS`, `INDPRO`, `CPIAUCSL`, the S&P 500 index, and a spread constructed from `DGS10` minus `TB3MS`. Employment, production, CPI, and equity levels enter in natural logarithms without multiplying by 100. The spread remains in documented yield units. The full reference ordering is spread, log equity prices, log employment, log production, and log CPI; the two yields become one modeled variable.
+## Reproduction
 
-The BVARs will use independent Normal/Wishart priors for coefficients and disturbance precision, with Minnesota-style shrinkage. Their exact construction and dimension-specific scaling require audit. Sensitivity to shrinkage intensity will assess whether conclusions depend on that choice. Reduced-form coefficients describe conditional relationships, without establishing causal effects.
+From this directory on Python 3.11 or later, install the shared diagnostics and payroll package. Verification and notebook exploration work from the published forecast records.
 
-## From MCMC to interpretable forecasts
+```sh
+python -m pip install -e ../project2 -e '.[dev]'
+pytest -q
+python scripts/verify_results.py
+```
 
-Gibbs sampling will represent uncertainty about coefficients and disturbance covariance. Predictive simulation will then draw joint future innovations in each BVAR. For every employment log-growth draw $g^{(s)}$, compute
+To refit all 1,308 primary and sensitivity specifications and repeat the 648 primary historical fits with a second seed, supply the exact external workbook described in the [data contract](data/README.md). The model uses all available monthly observations back to January 1962, twelve lags, a common issue date, and fixed prior settings at every origin.
 
-$$
-\Delta E^{(s)}=E_T[\exp(g^{(s)})-1].
-$$
+```sh
+OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 OMP_NUM_THREADS=1 payroll-risk /path/to/data_aggregated.xlsx --workers 4
+python scripts/figures.py
+python scripts/build_report.py
+```
 
-With `PAYEMS` retained in thousands of persons, the change is in thousands of jobs. Transform each draw before reporting means, medians, central 90% predictive intervals, and the predictive probability that $\Delta E<0$. This keeps parameter uncertainty, future shocks, and the nonlinear conversion in the forecast distribution.
+The publication bundle has checksums for the recorded outputs. Different numerical libraries can change simulation results slightly. The optional source audit uses an Excel reader for the legacy equity file (`pip install xlrd`) and a date-indexed GS10/TB3MS CSV from FRED. Run `python scripts/audit_inputs.py PANEL.xlsx EQUITY.xls YIELDS.csv OUTPUT.json`.
 
-## Historical evaluation
+## Implementation and evidence
 
-Use an expanding window over multiple monthly origins, including documented stress periods. Fix the initial training span, evaluation dates, episode definitions, and target-vintage policy after reviewing coverage and releases, before comparing performance.
+`PayrollPanel` enforces the data contract and origin-specific transformations. `MinnesotaPrior` supplies coefficient moments. `BayesianVAR` samples coefficients and innovation covariances. `ForecastDraws` converts the predictive law to job counts. The study driver runs matched origins, records chain diagnostics, and evaluates first-release and revised outcomes.
 
-Use common issue dates and a common last observation month for all models, determined by the latest fully released input set. Forecast the following month's employment change only when that payroll target remains unreleased; record the actual issue date and lead time. Match targets, units, effective training windows, and information cutoffs across models.
-
-Compare predictive means using RMSE, central 90% intervals using coverage and width, and loss probabilities using Brier scores against the observed employment-decline indicator. Report overall and stress-period results, including the number of decline events, without presuming the larger model is superior.
-
-Release calendars and unequal series availability require an explicit alignment policy. Fit scaling, priors or tuning rules, and missing-value treatments using training information only. Historical-vintage inputs are required for real-time claims; revised-data evaluation will be labeled pseudo-real-time. First-release and revised payroll targets must be distinguished consistently.
-
-## Extreme episodes and the reference illustration
-
-Observed data, including pandemic movements, will be the main analysis. The constant-covariance Gaussian model may misrepresent extreme outcomes; interval coverage and decline-probability scores will assess that limitation. Explicit pandemic-volatility modeling belongs to [Project 07](../project7/README.md).
-
-The December 2019–January 2022 interpolation remains a retrospective reference benchmark, with its transformation order and endpoint handling to be audited. Project 07 will compare it with volatility scaling at a common horizon. A backtest cannot use the January 2022 endpoint before its release.
-
-The January 1962–March 2026 sample and April 2026 target remain a separate fixed illustration. They do not define a current forecasting service or replace the multi-origin evaluation.
-
-## Inputs, implementation, and deliverables
-
-Pending inputs are frozen monthly data and vintages, the reference S&P 500 workbook, `BVAR.zip`, and complete prior definitions. Confirm monthly yield aggregation, price conventions, missing observations, and the documented treatment of any October 2025 CPI gap. Evaluation dates and release/target-vintage policies remain to be specified.
-
-Build and validate the employment baseline first, then the small and full systems. Separate data preparation, model/prior specifications, samplers, predictive simulation, and forecast evaluation. Shared components remain proposed. Checks will cover lag alignment, covariance conventions, MCMC diagnostics, joint shocks, employment units, and reproducibility.
-
-Deliverables will include a notebook, data/prior/configuration records, forecast and score tables for all three models, interval and loss-probability diagnostics, shrinkage sensitivity results, and an economic interpretation of when additional information earns its complexity.
+- [Historical forecasts](results/forecasts.csv) and [scores](results/scores.csv) include point, interval and event forecasts under both shrinkage settings.
+- [Independent-seed scores](results/replay_scores.csv) repeat the primary comparison with longer chains.
+- [April 2026 forecasts](results/reference.csv) and [CPI equation coefficients](results/cpi_coefficients.csv) document the fixed reference exercise.
+- [Release records](data/release_calendar.csv), [BLS first estimates](data/first_releases.csv) and the [input audit](results/input_audit.json) identify the data behind the comparison.

@@ -1,0 +1,26 @@
+{
+  "base_seed": 61027,
+  "chains": 4,
+  "historical_fits": 1296,
+  "historical_targets": [
+    "2007-01",
+    "2024-12"
+  ],
+  "packages": {
+    "arviz": "0.23.4",
+    "bayes-policy": "0.1.0",
+    "matplotlib": "3.11.2",
+    "nbformat": "5.11.1",
+    "numpy": "2.5.4",
+    "openpyxl": "3.1.5",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1"
+  },
+  "python": "3.12.14",
+  "reference_fits": 12,
+  "reference_target": "2026-04",
+  "replay_fits": 648,
+  "replay_seed": 61111,
+  "units": "thousands of jobs",
+  "workbook_sha256": "daf1da34b9f1da01d184b6867c6f37d62ee8b849e8d9abc613fc731199a95093"
+}

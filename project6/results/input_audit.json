@@ -1,0 +1,11 @@
+{
+  "workbook_sha256": "daf1da34b9f1da01d184b6867c6f37d62ee8b849e8d9abc613fc731199a95093",
+  "equity_workbook_sha256": "de4a8e76f9cfa9bdb3d2a7df0057b21ecbc9d32eac963124baae16d7e3633309",
+  "matched_months": 771,
+  "maximum_absolute_differences": {
+    "SP500": 0.0,
+    "TenYearBond": 0.0,
+    "ThreeMonthBill": 0.0
+  },
+  "october_2025_imputed_cpi": 324.65374237023667
+}
