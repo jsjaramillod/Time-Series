@@ -2,7 +2,7 @@
 
 An applied econometrics portfolio focused on Bayesian inference, temporal dynamics, and probabilistic forecasting. The projects examine how assumptions about economic relationships, model structure, and uncertainty affect the conclusions we draw from data.
 
-The central questions connect learning and prediction: how beliefs change with new observations, how economic shocks propagate, and how models translate incomplete information into forecasts. Bayesian updating anchors the existing work. Project 02 uses Markov chain Monte Carlo (MCMC), including Gibbs sampling, to study monetary policy and recession risk. The GDP and payroll studies evaluate dated forecasts, with further designs on extreme volatility and common economic signals.
+The central questions connect learning and prediction: how beliefs change with new observations, how economic shocks propagate, and how models translate incomplete information into forecasts. Bayesian updating anchors the existing work. Project 02 uses Markov chain Monte Carlo (MCMC), including Gibbs sampling, to study monetary policy and recession risk. The GDP and payroll studies evaluate dated forecasts, including a six-month employment comparison through an extreme episode. Project 08 studies common economic signals in its research design.
 
 ## Projects and current status
 
@@ -14,10 +14,10 @@ The central questions connect learning and prediction: how beliefs change with n
 | [04 — Lag Uncertainty and Bayesian Model Averaging](project4/README.md) | How much history does a model need, and how does lag uncertainty affect inference about persistence? | Implemented conditional AR comparison, Gibbs sampling, independent evidence controls, model-averaged posteriors, and research report. |
 | [05 — Probabilistic GDP Forecasts and Growth at Risk](project5/README.md) | How much could U.S. GDP grow over the next year, and how well do predictive distributions describe downside outcomes? | Executed quarterly GDP backtest, release calendar, downside-risk forecasts and pandemic sensitivity. |
 | [06 — Macroeconomic Information and Payroll Forecasts](project6/README.md) | When does additional macroeconomic and financial information justify greater complexity in one-month employment forecasts? | Three Bayesian models scored on 216 payroll releases, with first-release and revised targets, shrinkage checks and a fixed April 2026 illustration. |
-| [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Research design; implementation pending. |
+| [07 — Employment Forecasts Through Extreme Episodes](project7/README.md) | When does modeling exceptional volatility help six-month employment forecasts while retaining extreme observations? | Implemented six-month BVAR comparison, 28 matched origins, scored September 2026 coursework forecast, and a verified signal-extraction exercise. |
 | [08 — Common Factors, Forecast Evaluation, and Structural Interpretation](project8/README.md) | Can common signals aid prediction, and what long-run assumptions support the interpretation of technology shocks? | Research design; implementation pending. |
 
-The first five studies start with results from my doctoral time-series coursework. The PGA study reproduces the predictive mean and checks its upper tail. The policy study reproduces the original model odds and repairs the recession forecast dates. The shock experiment tests interval coverage, and the lag-order study tests sensitivity to prior beliefs. For GDP, a comparison of 78 matched annual forecasts finds a smaller overall error for the portfolio model and a smaller error for the coursework method over 13 post-pandemic origins. Project 06 starts from the original payroll estimate and tests its pandemic smoothing rule on matched dates.
+The first five studies start with results from my doctoral time-series coursework. The PGA study reproduces the predictive mean and checks its upper tail. The policy study reproduces the original model odds and repairs the recession forecast dates. The shock experiment tests interval coverage, and the lag-order study tests sensitivity to prior beliefs. For GDP, a comparison of 78 matched annual forecasts finds a smaller overall error for the portfolio model and a smaller error for the coursework method over 13 post-pandemic origins. Project 06 starts from the original payroll estimate and tests its pandemic smoothing rule on matched dates. Project 07 evaluates the original six-month payroll forecast against the September 2026 release and compares three pandemic treatments across 28 matched origins.
 
 [Saved coursework estimates](coursework_results.csv) are transcribed from the author's archived notebook. Each row identifies its output cell. The source notebook's SHA-256 is `8cb38041e00a5569e3167f3bb8cf90567daf5892520f434a1124f3c104a1f242`. The [GDP comparison](project5/results/course_comparison.csv) contains newly reconstructed forecasts and their outcomes.
 
@@ -78,18 +78,24 @@ Time-Series/
 │   ├── docs/
 │   └── results/
 ├── project7/
-│   └── README.md
+│   ├── README.md
+│   ├── src/payroll_volatility/
+│   ├── data/
+│   ├── tests/
+│   ├── notebooks/
+│   ├── docs/
+│   └── results/
 └── project8/
     └── README.md
 ```
 
-Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. Project 02 has its own installable package, dependency specification, command-line pipelines, and scientific test suite; see its README for reproduction commands. Project 03 also has an installable numerical package and reproducible pipeline; its synthetic experiments require no external dataset. Project 04 reuses the shared packages for conditional AR comparison and Bayesian model averaging; its source series remains external. Project 05 includes an executable forecast evaluation and verified source fingerprints. Project 06 includes a payroll forecast package and dated forecast records. Projects 07–08 remain research designs.
+Read the existing Project 01 notebook on GitHub or open it locally in Jupyter after preparing a Python environment with NumPy, pandas, SciPy, Matplotlib, and an Excel reader such as openpyxl. Project 02 has its own installable package, dependency specification, command-line pipelines, and scientific test suite; see its README for reproduction commands. Project 03 also has an installable numerical package and reproducible pipeline; its synthetic experiments require no external dataset. Project 04 reuses the shared packages for conditional AR comparison and Bayesian model averaging; its source series remains external. Project 05 includes an executable forecast evaluation and verified source fingerprints. Project 06 includes a payroll forecast package and dated forecast records. Project 07 implements temporary-volatility estimation, a six-month payroll comparison and an analytical signal filter. Project 08 remains a research design.
 
 <a id="research-progression"></a>
 
 ## Econometric themes
 
-These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01. Policy-response inference and recession probabilities are implemented in Project 02. Persistence and controlled shock transmission are implemented in Project 03, and lag-order comparison and model-averaged inference in Project 04. Project 05 evaluates predictive distributions for GDP. Project 06 evaluates how real and financial indicators change employment forecasts. The remaining designs cover Projects 07–08.
+These themes connect the concrete projects in the catalog. Bayesian learning has existing materials in Project 01. Policy-response inference and recession probabilities are implemented in Project 02. Persistence and controlled shock transmission are implemented in Project 03, and lag-order comparison and model-averaged inference in Project 04. Project 05 evaluates predictive distributions for GDP. Project 06 evaluates how real and financial indicators change employment forecasts. Project 07 tests the treatment of past shocks at a common six-month horizon. Project 08 remains in design.
 
 | Theme | Economic or statistical question | Methods and application |
 | --- | --- | --- |

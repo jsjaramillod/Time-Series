@@ -1,0 +1,23 @@
+name: Project 07 validation
+on:
+  push:
+    paths: ["project7/**", "project6/data/**", "project6/src/**", "project2/src/bayes_policy/**", ".github/workflows/project7.yml"]
+  pull_request:
+    paths: ["project7/**", "project6/data/**", "project6/src/**", "project2/src/bayes_policy/**", ".github/workflows/project7.yml"]
+permissions:
+  contents: read
+jobs:
+  forecast-controls:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: project7
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ../project2 -e ../project6 -e '.[dev]'
+      - run: ruff check src scripts tests
+      - run: pytest -q
+      - run: python scripts/verify_results.py

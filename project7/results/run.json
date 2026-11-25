@@ -1,0 +1,34 @@
+{
+  "seed": 72026,
+  "chains": 4,
+  "horizon": 6,
+  "workbook_sha256": "daf1da34b9f1da01d184b6867c6f37d62ee8b849e8d9abc613fc731199a95093",
+  "models": [
+    "Observed",
+    "Interpolated",
+    "Temporary volatility"
+  ],
+  "inputs": {
+    "release_calendar.csv": "25b48d5d3f1715b8c207140754da38618f4a818615901542a5d66cf92488e116",
+    "first_releases.csv": "cc0aaee1d6d4293149e9716913bdf790d941103f5215416fc257179b339b66bd",
+    "september_release.csv": "8d5959180ad7f8031ec6ea79b93b6fae3caf6ffe7c921bc479c9353ed2633376",
+    "coursework.csv": "2c76d9f39a63adc92ec3c99dbe49a09ae389342d1a50be0a459a5877dbc5d495",
+    "message.csv": "c58aaeda337f520b34d2bba42248b0c2c1ce7368aae7366872703a4b2421ab1b"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.1.1",
+    "arviz": "0.23.4"
+  },
+  "outputs": {
+    "forecasts.csv": "173144433ed7852fede502a9b7cfcd95330dbbcd41bd6b9244754fcf535503fe",
+    "reference.csv": "6b435577aa86fce1f44d0b5e1772c5ebce71260be928d2a35f58bbfe1e15a1fd",
+    "retrospective_scenario.csv": "103306779ee2c54c6144c0b35027758013ea9df844dc8725adbc14bfae5f339e",
+    "scores.csv": "518d180d6ba340e97e8d3e680f471e017c52355857c49503f19ebc5ab5db6075",
+    "signal.json": "4d8e7379deade652b60e3603b577e583b668fc3ee098ecaa2d0f8838d3f064a4",
+    "smoothed_state.csv": "d90521466f1d50d8e57b50230d8e42617282cff555940d1641e6430f3c1e3aa9",
+    "smoothed_state_scores.csv": "4cd6bf2f0d9a8525e88d67a8d632f8fc0f777da59667b83a05326cdffe86259e",
+    "volatility_percentiles.csv": "1c3e6f82af89b65a5db97615ecc7d663f1bcd12090e9d006dee9e0d24f82ee12"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "scientific_tests_passed": 12,
+  "executed_notebook_cells": 8,
+  "report_pages": {
+    "executive_summary.pdf": 1,
+    "payroll_after_shocks.pdf": 5
+  },
+  "identical_primary_rebuild": [
+    "forecasts.csv",
+    "reference.csv",
+    "retrospective_scenario.csv",
+    "run.json",
+    "scores.csv",
+    "signal.json",
+    "smoothed_state.csv",
+    "smoothed_state_scores.csv",
+    "volatility_percentiles.csv"
+  ],
+  "independent_replay_seed": 73191,
+  "published_sha256": {
+    "src/payroll_volatility/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/payroll_volatility/model.py": "b40eedfb16a2aed45148ed6af19c417bef092a582497edbe42e6da5ab7540730",
+    "src/payroll_volatility/signal.py": "891f373b59e3ffbf9d20901fbcc754a3f42a6545fa1e2b12910c4187cf61c300",
+    "src/payroll_volatility/study.py": "5764bd1ede7b63ab20cac22705ed50866ade2eb827212d07985c0a356310e1ce",
+    "scripts/build_report.py": "840cd169ed5551bb324fd304d995960ad959d6fbf241618d03200cc3bef1f4b6",
+    "scripts/figures.py": "ab11b96bb6e3909c1164a080fd44e44b6ba2c7ec6588c3c7d4921a53c906ff8a",
+    "scripts/persistence.py": "8dbf118e165c2309de209ad0ea38ad54681c6c841308c5fff5a8b814f1d5bc12",
+    "scripts/replay.py": "06428d785d6c110e5a7fe7586777d35fc90225ec77680a02ded42ef101e840f4",
+    "scripts/verify_results.py": "5ec53f8570c9c3bab4c7b90806b4a408a2fa08d1f2e5e43215d0918c66433ff7",
+    "tests/test_volatility.py": "3078acb71ea95e8789b98003c236247f6185fb09bc8bcc40ed53d2240ae52f5f",
+    "notebooks/project07_analysis.ipynb": "52f610448a33290810318de0172d393e9a98218214eebcc73b0f67eb3740b83d",
+    "docs/executive_summary.pdf": "051d93f1e837695aa4fae87d8975d7a1bc25b4350489d772fcdc0c8c59f634ef",
+    "docs/payroll_after_shocks.pdf": "653ddba7fc114937eb63cd94861260d26ac2fe5957bee08c3f4c9497fd612ec0",
+    "results/figures/payroll_paths.png": "f8f7bd8445b17a27223dc4dea66a3d13877432981c7e252667daf80aab2b0914",
+    "results/figures/volatility_posterior.png": "03c4de7a00e2dd2bc16613f052dd61abd0f917743cc6085c4f15b8f0163f6c1d",
+    "results/run.json": "35d8839f4dfcaa388887ed6cc1f32c84bd8993976ccfa496bfb7393e029d5c01",
+    "results/persistence.csv": "e537f2e984a139c739b1051f9424b8b5f9cd844cc5a0fe56f86352168267428e",
+    "results/replay_scores.csv": "8f47e64dec446f9cf5275a8761379094296686cc1a4c2e51ebe02e5dc0a97c4d",
+    "results/replay_reference.csv": "40112219c86a2d846da014122e2903145d5f249b2d76b739c8be03719bf1f00d"
+  }
+}

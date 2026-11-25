@@ -1,0 +1,29 @@
+# Estimation, forecasting and controls
+
+## What changed in the comparison
+
+Five monthly series enter in this order: ten-year Treasury yield minus the three-month bill yield, S&P 500, payroll employment, industrial production and CPI. The spread is in percentage points. The other four series are 100 times their natural logarithms, matching the doctoral assignment. All three models start in January 1962 with twelve lags. October 2025 CPI in the reference fit is the geometric mean of the September and November levels. Both neighbors were available by the March 2026 cutoff.
+
+The constant-variance fits differ in the data supplied to the regression. The temporary-volatility fit retains every observation and changes the observation weight. All fits use the observed origin level as the payroll base. The primary comparison also supplies the same twelve observed lags to start each forecast. A separate calculation starts the interpolation model on its own smoothed history.
+
+## Coefficients, covariance and the pandemic multiplier
+
+Given a coefficient matrix B, the observation at month t has mean x(t) B and covariance s(t) Σ. The row x(t) contains an intercept and the previous twelve five-variable observations. For the temporary treatment, s(t) = γ × 0.9^j in the 25 months from March 2020 (j = 0) through March 2022 (j = 24), and 1 elsewhere. γ multiplies **variance**. Its square root multiplies standard deviation. March 2022 and April 2022 can therefore have quite different estimated uncertainty. The design fixes these dates and the decay retrospectively. [Lenza and Primiceri](https://doi.org/10.1002/jae.2895)
+
+The independent Gaussian coefficient prior has a mean of one on each variable's first own lag and zero elsewhere. Own-lag variance is 0.1 divided by squared lag order. Cross-lag variance also multiplies this by 0.01 times the equation's residual standard deviation divided by that of the regressor series. The intercept variance is 1,000. At each origin, the residual standard deviations come from unrestricted regressions on the **observed** training data and are shared by all treatments. This holds the prior constant when comparing models. To match the actual class calculation, the inverse-Wishart prior on Σ has seven degrees of freedom and scale diag(1/σ²), where σ is the five-vector of these standard deviations. Using diag(σ²) would define another prior.
+
+All terms in each regression row, including the intercept, receive the same inverse-square-root variance weight. For d = 1/γ the coursework uses a Gamma prior with shape and scale both one. The conditional shape is 1 + 25 × 5 / 2. The conditional rate is 1 + 0.5 times the sum of residual quadratic forms e(t)' Σ⁻¹ e(t) weighted by 0.9^(−j) in the event window. A QR change of coordinates and separate sufficient statistics inside and outside that window avoid repeatedly forming the entire design. Each Gibbs iteration makes a joint Gaussian draw of all 305 coefficients and an inverse-Wishart covariance draw.
+
+Four independent chains have dispersed initial multipliers. The sampler checks rank-normalized split R-hat (at most 1.01) and both bulk and tail effective sample size (at least 400) for the six-month conditional growth mean, its standard deviation, the first own employment lag and the volatility multiplier when present. Chain-mean standard errors are recorded for the level forecast. A new fit with a second seed is used to check the fixed-origin result.
+
+## Six-step prediction and scoring
+
+Each draw holds B and Σ fixed for six recursive steps. The code simulates joint innovations for all five series. It independently accumulates the six-step impulse-response variance to integrate out future shocks conditional on each draw. The resulting normal mixture gives the reported growth percentiles and probability of a decline. If g is a simulated change in 100 log points and E is the observed origin level in thousands, the corresponding gain is E × expm1(g/100). The reported predictive mean averages the conditional transformed means over the retained draws. The probability of a decline is averaged over those same draws. Growth medians transform directly to job medians.
+
+The post-crisis exercise uses revised predictors and a common observed target. It is pseudo-real-time. Summing the six originally announced monthly changes provides a separate sensitivity, since consecutive announcements can revise the employment base. It is a different outcome from subtracting two levels in one vintage. The September 2026 reference instead uses both levels from the September release vintage. The February 2020 scenario uses parameter draws from March 2022 and the actual state in February 2020. Switching only future variance isolates the consequences for forecast dispersion. The scenario never enters the historical scores.
+
+## The state-space exercise
+
+A second part of the coursework represents an observed sum of an AR(1) signal and moving-average noise using the state (signal, current noise innovation, previous noise innovation). The observation weights are (1, 1, θ). The next state has autoregressive coefficient φ on the signal and shifts the current noise innovation to the third position. Independent signal and noise innovations enter the first two positions, with zero extra observation error.
+
+The numerical exercise instead gives the signal two lags (0.5, 0.4) and the noise one lag (0.7). The state contains the signal, its previous value and the noise. Shock variances are 1 and 0.5, and the observation is signal plus noise. The filter starts at the stationary Gaussian distribution and conditions on each of the 200 messages. A separate calculation forms the 200 × 200 covariance of all observations and directly conditions the final signal on that vector. This checks the filter without using economic outcomes.

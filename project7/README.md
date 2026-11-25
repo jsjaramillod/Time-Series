@@ -1,64 +1,58 @@
-# Project 07: Employment Forecasts Through Extreme Episodes
+# Payroll Forecasts After a Shock
 
-How can we forecast employment during extreme episodes without deleting those observations? This project will test when explicitly modeling exceptional volatility helps a macroeconomic forecasting system. The economic focus is the distribution of cumulative employment changes over six months.
+My doctoral time-series model put the median U.S. payroll gain from March to September 2026 at **about 289,000 jobs**. The gain in the September release vintage was **394,000**. The model kept every pandemic observation and allowed its shocks to be unusually large. The assignment left a practical question open. Would that approach improve a six-month forecast compared with smoothing the pandemic observations?
 
-**Status: research-design draft.** No models, prepared datasets, or reproduced results are implemented here. The historical evaluation is a proposed extension of the fixed reference experiment.
+[One-page executive brief](docs/executive_summary.pdf) · [Research report](docs/payroll_after_shocks.pdf) · [Executed analysis notebook](notebooks/project07_analysis.ipynb) · [Executive summary](EXECUTIVE_SUMMARY.md)
 
-## Three treatments, one forecasting question
+## The assignment and the new comparison
 
-Use the full BVAR from [Project 06](../project6/README.md): five variables, twelve monthly lags, and an intercept. Its inputs combine employment, industrial production, CPI, equity prices, and a Treasury yield spread.
+The original predictive median was **0.182** in 100 log points, against realized growth of **0.248**. Its estimated March 2020 innovation variance was **103.55 times** the ordinary level. The independent implementation recovered a median multiplier of **103.67**. It placed median six-month hiring at **315,000 jobs**, an underestimate of 79,000. Interpolation came closest for this period at **354,000**, about 40,000 below the outcome. The underlying class forecast was saved in log units. Its job equivalent uses the forecasting workbook's March payroll level. [Saved estimates](data/coursework.csv) · [Reference forecasts](results/reference.csv) · [BLS release levels and vintages](data/README.md)
 
-| Treatment | Data | Disturbance covariance |
-| --- | --- | --- |
-| Observed-data baseline | Retain observed pandemic movements. | Constant. |
-| Interpolation benchmark | Retrospective December 2019–January 2022 adjustment. | Constant. |
-| Temporary volatility | Retain observed pandemic movements. | Time-varying scalar times a common covariance matrix. |
+## When did each approach help?
 
-Match forecast origins, observed targets, vintage rules, effective training windows, shared parameter priors, units, and other transformations. Audit interpolation details and document the different pandemic windows; the treatments differ in more than variance alone.
+All three Bayesian vector autoregressions (BVARs) use five monthly series, twelve lags and the same six-month target. Each forecast starts from observed conditions. Across 28 post-pandemic origins, interpolation had the smallest forecast error on revised employment levels. Temporary volatility cut error by **22.6%** compared with fitting constant variance to all observed data. It also retained the pandemic observations.
 
-All three forecasts must use the six-month horizon. The monthly forecast in Project 06 is not an equivalent benchmark. The fixed illustration retains the January 1962–March 2026 sample and a six-month cumulative forecast from March 2026, separately from the multi-origin evaluation.
+| Forecast method | RMSE on revised payroll gains | RMSE on sum of first announcements | Mean width of 90% interval |
+| --- | ---: | ---: | ---: |
+| Observed history, constant variance | 611,000 | 874,000 | 7.89 million |
+| Interpolated training history | **459,000** | 694,000 | 3.08 million |
+| Observed history, temporary volatility | 473,000 | 665,000 | 3.20 million |
+| Repeat the preceding six-month gain | 596,000 | **515,000** | Point forecast only |
 
-## Temporary volatility and MCMC
+RMSE is the root mean squared error in jobs. The sum of first announcements combines six initial monthly changes, each published at a different date. The standings reverse between the two pandemic treatments when the outcome changes. The simple rule was added as a supplementary check after the three BVARs were scored. All three models' intervals covered every revised outcome, and all 28 outcomes were gains. Monthly origins overlap. Interpolation beat temporary volatility in four of six nonoverlapping offsets. [Matched forecasts](results/forecasts.csv) · [Scores by target and offset](results/scores.csv) · [Simple benchmark](results/persistence.csv)
 
-The scaled BVAR is
+![Realized and predicted six-month gains in U.S. payrolls](results/figures/payroll_paths.png)
 
-$$
-Y_t=Z_t\beta+\sqrt{s_t}\varepsilon_t,
-\qquad \varepsilon_t\sim N(0,\Sigma).
-$$
+**The latest observations matter.** Interpolating the training sample and then feeding its smoothed lags into the forecast raised revised-target RMSE from **459,000 to 708,000 jobs**. The same fitted coefficients produced both forecasts at each origin. [Starting-state sensitivity](results/smoothed_state_scores.csv)
 
-Outside March 2020–March 2022, $s_t=1$. Within those 25 months,
+**A retrospective stress scenario.** For February to August 2020, the observed decline was **11.47 million jobs**. Holding the February starting state and the post-crisis parameter draws fixed, the lower end of the 90% interval moved from **−0.64 million** under ordinary shocks to **−11.71 million** when allowing elevated variance. The scenario uses the crisis dates and parameters learned later. [Scenario results](results/retrospective_scenario.csv)
 
-$$
-s_t=\gamma\rho^{t-t_0},\qquad \rho=0.9,\qquad \gamma>0,
-$$
+**A separate signal-extraction check.** Given 200 noisy observations, the Kalman filter recovered the class result for the terminal signal. Its median was **−2.14685**, with quartiles **−2.71956** and **−1.57414**. Direct conditioning on all messages independently verified the filter. [Signal results](results/signal.json)
 
-where $t_0$ is March 2020. The scale returns to one in April 2022. This reference specification is motivated by Lenza and Primiceri (2022).
+## Reproduce the study
 
-Gibbs updates will sample coefficients, disturbance precision, and inverse scale. For $d=\gamma^{-1}$, the Gamma prior has kernel $d^{a-1}\exp(-d/b)$, with shape $a$ and scale $b$ pending specification. Conditional on the scale, divide each complete regression row, including its intercept and lagged regressors, by the current-period $\sqrt{s_t}$.
+The public notebook, verification and report generation use the checked-in results. Re-estimation additionally requires the two matching external input files. The [input notes](data/README.md), [protocol](docs/protocol.md) and [methods](docs/methods.md) describe timing, transformations, conditional distributions, diagnostics, scoring and limitations. The historical design uses revised inputs and the release calendar from Project 06.
 
-MCMC captures parameter uncertainty. Predictive simulation will propagate joint innovations over six steps, retaining one parameter draw per path. Convert each cumulative employment log-growth draw $g_6$ into $E_T[\exp(g_6)-1]$ before reporting changes in thousands of jobs and predictive intervals.
+Run from the project7 directory using Python 3.12.
 
-## Historical evaluation without future information
+```sh
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ../project2 -e ../project6 -e '.[dev]'
+pytest -q
+python scripts/verify_results.py
+python scripts/figures.py
+python scripts/build_report.py
+```
 
-Freeze the specification, priors, preprocessing, initial training span, origin selection, stress-period definitions, and target-vintage policy before computing scores. Use expanding estimation windows and retain only origins with realized six-month payroll targets.
+To re-estimate the models, set WORKBOOK and MESSAGES to the two local paths. Each Gibbs draw is reused through all six forecast steps. Independent seeds repeat the full historical evaluation.
 
-At each issue date, fit models and preprocessing using only released training observations. Record a common monthly cutoff and the corresponding six-month target.
+```sh
+export OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 OMP_NUM_THREADS=1
+payroll-volatility --workbook "$WORKBOOK" --message "$MESSAGES" --shared-data ../project6/data --project-data data --output results --workers 4
+python scripts/replay.py "$WORKBOOK" "$MESSAGES" --workers 4
+python scripts/persistence.py "$WORKBOOK"
+python scripts/verify_results.py
+```
 
-The primary three-way comparison must use common origins after the interpolation endpoints and the complete reference volatility window were available. It evaluates how treating an already observed crisis affects subsequent forecasts. Dates will be chosen after auditing release calendars and coverage; suitable later stress episodes can be evaluated only within that feasible sample.
-
-The pandemic window and fixed decay rate were chosen retrospectively. Even with historical data vintages, this is a post-crisis evaluation of a frozen retrospective specification. It does not establish that the model could have identified or forecast the crisis prospectively. Revised-data runs must additionally be labeled pseudo-real-time.
-
-During-crisis comparisons that require future interpolation endpoints or the completed volatility window belong to a separate retrospective scenario analysis, excluded from historical forecast-score tables. A prospective shock-detection and scaling rule remains an extension to be specified.
-
-Score predictive means with RMSE and central 90% intervals with coverage and width, using the same observed payroll outcomes for every treatment. Never score against interpolated targets. Six-month outcomes overlap across adjacent monthly origins; report that dependence and repeat comparisons using nonoverlapping origins before drawing performance conclusions.
-
-## Controls, implementation, and deliverables
-
-A subordinate technical control will use the known-parameter Gaussian signal model and 200 observations in `message.csv`. Analytical Kalman filtering will recover the terminal signal distribution and its quartiles. This checks filtering machinery with fixed parameters, independently of the empirical BVAR and its MCMC estimation.
-
-Validate scale dates, complete-row transformations, Gamma updates, covariance conventions, sampling diagnostics, and Monte Carlo uncertainty. Forecast checks must preserve horizon, units, information cutoffs, and matched evaluation samples.
-
-The proposed implementation separates variance scaling, BVAR sampling, predictive paths, and origin-by-origin comparison records. Shared components remain planned. Missing inputs include the macroeconomic data and reference BVAR programs from Project 06, complete priors and scale hyperparameters, vintages and realized targets, and the signal control's data and initial-state prior.
-
-Deliverables will include a reproducible notebook, data/prior/configuration records, a volatility-posterior plot, matched six-month forecast and score tables, interval diagnostics, and a separately labeled retrospective crisis sensitivity. Conclusions will distinguish post-crisis forecasting evidence from technical validation and retrospective scenarios.
+[Model implementation](src/payroll_volatility/model.py) · [Run record](results/run.json) · [Independent replay](results/replay_scores.csv)
