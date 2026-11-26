@@ -1,0 +1,10 @@
+term,productivity,hours
+intercept,0.006505,0.000544
+productivity_lag1,-0.072421,0.083450
+hours_lag1,0.048146,0.600702
+productivity_lag2,0.083409,0.123498
+hours_lag2,-0.171032,-0.085810
+productivity_lag3,-0.035118,0.066305
+hours_lag3,-0.186770,-0.007216
+productivity_lag4,0.035275,0.026071
+hours_lag4,-0.025767,-0.076645

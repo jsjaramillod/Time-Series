@@ -1,0 +1,11 @@
+exercise,quantity,unit,value,source
+activity,AR persistence mean,coefficient,0.8254123642742917,notebook cell 64d6e923-4395-4178-a050-91e179fe32bf
+activity,sales loading mean,coefficient,0.25105546,notebook output 1 mapped to workbook header
+activity,production loading mean,coefficient,0.37178188,notebook output 2 mapped to workbook header
+activity,payroll loading mean,coefficient,0.49667055,notebook output 3 mapped to workbook header
+activity,income loading mean,coefficient,0.20637859,notebook output 4 mapped to workbook header
+wide,OLS RMSE,target units,107.992,submitted exercise 3 table
+wide,Ridge 15 raw RMSE,target units,98.450,submitted exercise 3 table
+wide,PCA 2 RMSE,target units,97.220,submitted exercise 3 table
+hours,1994 impact mean,log points,-0.002411,submitted exercise 4 impact table
+hours,1994 negative impact probability,probability,0.9825,submitted exercise 4 impact table
